@@ -3,6 +3,10 @@ package com.getcar.loan.config;
 public class SwaggerConfig {
 
 	public void swaggerConfiuration() {
+<<<<<<< HEAD
+		System.out.println("swaggerConfiuration"); 
+		
+=======
 		System.out.println("swaggerConfiuration");
 <<<<<<< HEAD
 		System.out.println("changes done by sunanda---------");

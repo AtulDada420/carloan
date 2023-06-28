@@ -9,8 +9,12 @@ public class SwaggerConfig {
 =======
 		System.out.println("swaggerConfiuration");
 <<<<<<< HEAD
+<<<<<<< HEAD
+		System.out.println("changes done by sunanda---------");
+=======
 		System.out.println("Created");
 		System.out.println("Just created");
+>>>>>>> 9db278d2fbfe0bdb3a71981f0b9752aacc18cde9
 		
 =======
 		System.out.println("changes done by prajwal");

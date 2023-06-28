@@ -5,7 +5,6 @@ public class SwaggerConfig {
 	public void swaggerConfiuration() {
 		System.out.println("swaggerConfiuration");
 		System.out.println("changes done by sunanda---------");
-		System.out.println("**************************");
-		System.out.println("created sucessfully");
+		
 	}
 }

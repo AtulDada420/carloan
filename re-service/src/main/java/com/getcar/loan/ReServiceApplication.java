@@ -9,9 +9,7 @@ public class ReServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ReServiceApplication.class, args);
 		System.out.println("carloan wroking");
-		System.out.println("Created");
-		System.out.println("Just created");
-		System.out.println("carloan wroking");
-		System.out.println("carloan app added to git - shubham kaviskar");
+		System.out.println("carloan re-module added to git - shubham kaviskar ");
 	}
+
 }

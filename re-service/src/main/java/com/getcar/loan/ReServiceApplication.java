@@ -10,6 +10,8 @@ public class ReServiceApplication {
 		SpringApplication.run(ReServiceApplication.class, args);
 		System.out.println("carloan wroking");
 		System.out.println("carloan re-module added to git - shubham kaviskar ");
+		System.out.println("carloan re-module added to git - Swapnali More ");
+		
 	}
 
 }

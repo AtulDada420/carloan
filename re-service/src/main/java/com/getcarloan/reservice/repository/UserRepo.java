@@ -5,4 +5,6 @@ import com.getcarloan.reservice.entities.User;
 
 public interface UserRepo extends JpaRepository<User, Integer> {
 
+	boolean existsByUserId(int userId);
+
 }

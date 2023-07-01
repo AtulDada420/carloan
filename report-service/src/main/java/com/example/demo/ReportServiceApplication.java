@@ -1,14 +1,13 @@
-package com.getcar.loan;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ReServiceApplication {
+public class ReportServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReServiceApplication.class, args);
-	
+		SpringApplication.run(ReportServiceApplication.class, args);
 	}
 
 }

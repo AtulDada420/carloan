@@ -55,10 +55,10 @@ public class ReserviceController {
 	
 	@PostMapping("/saveDocument")
 	public ResponseEntity<String> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
-			@RequestPart MultipartFile F3, @RequestPart MultipartFile F4, @RequestPart MultipartFile F5, @RequestPart MultipartFile F6, @RequestPart MultipartFile F7, @RequestPart MultipartFile F8) {
-
+			@RequestPart MultipartFile F3, @RequestPart MultipartFile F4, @RequestPart MultipartFile F5,
+			@RequestPart MultipartFile F6, @RequestPart MultipartFile F7, @RequestPart MultipartFile F8) {
+		
 		AllPersonalDocs doc = new AllPersonalDocs();
-
 		try {
 
 			doc.setAddressProof(F1.getBytes());
@@ -69,23 +69,16 @@ public class ReserviceController {
 			doc.setSign(F6.getBytes());
 			doc.setBankCheck(F7.getBytes());
 			doc.setSalarySlips(F8.getBytes());
-			
-
 		}
-
 		catch (IOException e) {
-
 			e.printStackTrace();
 		}
-
 		service.saveDocument(doc);
-
 		return ResponseEntity.status(HttpStatus.CREATED).body("Document uploaded");
 	}
 
 	@ExceptionHandler(IOException.class)
 	public ResponseEntity<String> ioException() {
-
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File not uploaded correctly");
 	}
 

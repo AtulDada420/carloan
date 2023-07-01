@@ -13,17 +13,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnquiryDetails {
- 
+public class LoanPlans {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int eid;
-	private int userId;
-	private String carName;
-	private String carBrand;
-	private String carColor;
-	private double price;
-	private String email;
-	private long mobileNo;
-   	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int planID;
+	private int silver;
+	private int gold;
+	private int platinum;
 }

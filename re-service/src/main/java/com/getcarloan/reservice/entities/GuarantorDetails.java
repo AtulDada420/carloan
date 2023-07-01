@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class GuarantorDetails {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	 private int gid;						
 	 private String gName; 						
 	 private String gDateOfBirth;					

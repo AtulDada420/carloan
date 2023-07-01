@@ -4,7 +4,7 @@ import com.getcarloan.reservice.entities.AllPersonalDocs;
 
 public interface AllPersonalDocsService {
 
-	void saveDocument(AllPersonalDocs doc);
+	void saveDocument(AllPersonalDocs docs);
 	
 
 }

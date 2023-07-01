@@ -36,7 +36,7 @@ public class ReserviceController {
 
 		
 	@GetMapping("/getAllEnquiry")
-	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry1() {
+	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry22() {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
 	}
 	

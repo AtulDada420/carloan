@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AllPersonalDocs {
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "docs_generator")
+@SequenceGenerator(name = "docs_generator", sequenceName = "DOCUMENTS_SEQUENCE",initialValue=888,allocationSize = 0)
 private int docId;
 
 @Lob
@@ -30,9 +32,9 @@ private byte[] adharCard;
 @Lob
 private byte[] photo;
 @Lob
-private byte[] Sign;
+private byte[] sign;
 @Lob
-private byte[] bankCheck;
+private byte[] bankCheque;
 @Lob
 private byte[] salarySlips;
 

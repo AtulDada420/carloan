@@ -90,7 +90,7 @@ public class ReserviceController {
 			doc.setAdharCard(F4.getBytes());
 			doc.setPhoto(F5.getBytes());
 			doc.setSign(F6.getBytes());
-			doc.setBankCheck(F7.getBytes());
+			doc.setBankCheque(F7.getBytes());
 			doc.setSalarySlips(F8.getBytes());
 		}
 		catch (IOException e) {

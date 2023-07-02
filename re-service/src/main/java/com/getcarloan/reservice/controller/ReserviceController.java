@@ -25,6 +25,7 @@ import com.getcarloan.reservice.entities.CustomerAddress;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.GuarantorDetails;
 import com.getcarloan.reservice.entities.LoanDetails;
+import com.getcarloan.reservice.entities.LoanPlans;
 import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
@@ -32,6 +33,7 @@ import com.getcarloan.reservice.service.CustomerAddressService;
 import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.GuarantorDetailsService;
 import com.getcarloan.reservice.service.LoanDetailsService;
+import com.getcarloan.reservice.service.LoanPlansService;
 import com.getcarloan.reservice.service.ReserviceService;
 import com.getcarloan.reservice.service.UserService;
 
@@ -60,6 +62,12 @@ public class ReserviceController {
 
 	@Autowired
 	private LoanDetailsService loanservice;
+	
+	
+	@Autowired
+	private LoanPlansService loanPlanservice;
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/createEnquiry")
@@ -267,5 +275,32 @@ public class ReserviceController {
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@PostMapping("/saveLoanPlans")
+public ResponseEntity<String>saveLoanPlans(@RequestBody LoanPlans loanPlans){
+	return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans),HttpStatus.CREATED);
+}
+
+@GetMapping("/getAllLoanPlansByUserId/{userId}")
+public ResponseEntity<LoanPlans>getAllLoanPlansByUserId(@PathVariable int userId)
+{
+	 return new ResponseEntity<LoanPlans>(loanPlanservice.getAllLoanPlansByUserId(userId),HttpStatus.OK);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

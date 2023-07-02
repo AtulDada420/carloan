@@ -41,18 +41,6 @@ public class ReserviceServer implements ReserviceService {
 		
 	}
 
-	@Override
-	public List<EnquiryDetails> getAllEnquiry() {
-		
-		return rerepo.findAll();
-	
-
-
-		if(rerepo.existsByUserId(userId)) 
-			return rerepo.findById(userId).get();
-		else 
-			return new EnquiryDetails();
-	}
 
 	@Override
 	public List<EnquiryDetails> getAllEnquiry() {		

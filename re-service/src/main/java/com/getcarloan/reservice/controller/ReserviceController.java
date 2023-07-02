@@ -58,9 +58,7 @@ public class ReserviceController {
 	@Autowired
 	private AllPersonalDocsService docservice;
 	
-<<<<<<< HEAD
 
-=======
 	@Autowired
 	private CustomerService customerservice;
 	
@@ -68,9 +66,7 @@ public class ReserviceController {
 	private AccountDetailsService  accservice;
 	
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
->>>>>>> c80d4a07c80eb22c22ed2a816db6efac4c6a7b62
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
 		return new ResponseEntity <String> (reservice.createEnquiry(enquiryDetails),HttpStatus.CREATED);
@@ -110,10 +106,7 @@ public class ReserviceController {
 	public ResponseEntity <String> deleteUser(@PathVariable int userId){
 		return new ResponseEntity <String>(usrservice.deleteUser(userId),HttpStatus.OK);
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> c87cf17892e26c9ed4d844a2aa1bbee039726ec9
+
 
 	
 	@PostMapping("/saveDocument")

@@ -38,14 +38,9 @@ private byte[] photo;
 @Lob
 private byte[] sign;
 @Lob
-<<<<<<< HEAD
-private byte[] bankCheck;
-
-=======
 private byte[] bankCheque;
->>>>>>> c87cf17892e26c9ed4d844a2aa1bbee039726ec9
-@Lob
 
+@Lob
 private byte[] salarySlips;
 
 }

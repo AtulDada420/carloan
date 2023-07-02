@@ -3,6 +3,7 @@ package com.getcarloan.reservice.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,13 @@ public class UserServiceIMPL implements UserService {
 	@Override
 	public String saveUser(User user) {
 		usrepo.save(user);
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("sunagujiri22@gmail.com");
+		message.setTo(user.getEmail());
+		message.setSubject("Mail From Sunanda");
+		message.setText("userId"+" : "+user.getUserId()+"____________"+"usernamer"+" : "+user.getUserName()+"____________"+"password"+" : "+user.getPassword());
+		
+     	sender.send(message);
 		return "New User Added";
 	}
 

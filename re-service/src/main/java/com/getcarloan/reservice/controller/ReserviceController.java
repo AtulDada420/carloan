@@ -41,6 +41,9 @@ public class ReserviceController {
 	@Autowired
 	private AllPersonalDocsService docservice;
 	
+<<<<<<< HEAD
+
+=======
 	@Autowired
 	private CustomerService customerservice;
 	
@@ -53,6 +56,7 @@ public class ReserviceController {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+>>>>>>> c80d4a07c80eb22c22ed2a816db6efac4c6a7b62
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
 		return new ResponseEntity <String> (reservice.createEnquiry(enquiryDetails),HttpStatus.CREATED);
@@ -62,13 +66,10 @@ public class ReserviceController {
 	public ResponseEntity<EnquiryDetails> getEnquiryByUserId(@PathVariable int userId) {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getEnquiryByUserId(userId));
 	}
-	
 	@GetMapping("/getAllEnquiry")
 	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
 	}
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	@PostMapping("/saveUser")
 	public ResponseEntity <String> saveUser(@RequestBody User user){
@@ -94,8 +95,7 @@ public class ReserviceController {
 	public ResponseEntity <String> deleteUser(@PathVariable int userId){
 		return new ResponseEntity <String>(usrservice.deleteUser(userId),HttpStatus.OK);
 	}
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
 	
 	@PostMapping("/saveDocument")
 	public ResponseEntity<String> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
@@ -110,7 +110,7 @@ public class ReserviceController {
 			doc.setAdharCard(F4.getBytes());
 			doc.setPhoto(F5.getBytes());
 			doc.setSign(F6.getBytes());
-			doc.setBankCheck(F7.getBytes());
+			doc.setBankCheque(F7.getBytes());
 			doc.setSalarySlips(F8.getBytes());
 		}
 		catch (IOException e) {

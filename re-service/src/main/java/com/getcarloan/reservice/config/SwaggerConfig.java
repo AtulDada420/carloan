@@ -1,21 +1,7 @@
 package com.getcarloan.reservice.config;
 
-<<<<<<< HEAD
-public class SwaggerConfig {
 
-	public void swaggerConfiuration() {
-		System.out.println("swaggerConfiuration"); 
-		System.out.println("swaggerConfiuration");
-		System.out.println("swaggerConfiuration");
-		System.out.println("changes done by sunanda---------");
-		System.out.println("Created");
-		System.out.println("Just created");
-		System.out.println("swaggerConfiuration");
-		System.out.println("changes done by prajwal");
-		System.out.println("changes done by Atul");
-		System.out.println("changes done by Mangesh");
-	}
-=======
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -38,5 +24,5 @@ public class SwaggerConfig {
 					.paths(PathSelectors.any())
 					.build();
 		}	
->>>>>>> 9bef55e1871f6cf810647c0d158aa9b009c475f4
+
 }

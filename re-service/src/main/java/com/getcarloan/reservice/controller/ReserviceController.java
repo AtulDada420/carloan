@@ -32,10 +32,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.getcarloan.reservice.entities.AllPersonalDocs;
+import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
 
 import com.getcarloan.reservice.service.AllPersonalDocsService;
+import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.ReserviceService;
 import com.getcarloan.reservice.service.UserService;
 
@@ -55,6 +57,8 @@ public class ReserviceController {
 	@Autowired
 	private AllPersonalDocsService docservice;
 	
+	@Autowired
+	private CustomerService customerservice;
 	
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
@@ -126,7 +130,31 @@ public class ReserviceController {
 	public ResponseEntity<String> ioException() {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File not uploaded correctly");
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	@GetMapping("/getCustomerById/{cId}")
+	public ResponseEntity<Customer> getCustomerId(@PathVariable int cId) {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerById(cId));
+}
+
+	@PostMapping("/saveCustomer")
+	public ResponseEntity <String> saveCustomer(@RequestBody Customer customer){
+		return new ResponseEntity <String> (customerservice.saveCustomer(customer),HttpStatus.CREATED);
+
+	}
+	@GetMapping("/getAllCustomer")
+	public ResponseEntity<List<Customer>> getAllCustomer() {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllCustomer());
+}
+	@PutMapping("/updateCustomer")
+	public ResponseEntity <String> updateCustomer(@RequestBody Customer customer){
+		return new ResponseEntity <String> (customerservice.updateCustomer(customer),HttpStatus.OK);
+	}
+	@DeleteMapping("deleteCustomer/{cId}")
+	public ResponseEntity <String> deleteCustomer(@PathVariable int cId){
+		return new ResponseEntity <String>(customerservice.deleteCustomer(cId),HttpStatus.OK);
+}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
-	
-

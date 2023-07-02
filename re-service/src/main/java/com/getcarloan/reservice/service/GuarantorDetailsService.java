@@ -1,7 +1,12 @@
 package com.getcarloan.reservice.service;
 
-import com.getcarloan.reservice.entities.AccountDetails;
+import java.util.List;
+
+
+
+
 import com.getcarloan.reservice.entities.GuarantorDetails;
+import com.getcarloan.reservice.entities.LoanDetails;
 
 public interface GuarantorDetailsService {
 
@@ -9,6 +14,15 @@ public interface GuarantorDetailsService {
 
 	GuarantorDetails getAllGuarantorDetailsByUserId(int userId);
 
+	String updateGuarantorDetails(GuarantorDetails guarantorDetails);
+
+	String deleteGuarantorDetailsByUserId(int userId);
+
+	List<GuarantorDetails> getAllGuarantorDetails();
+
+
+
+	
 
 
 }

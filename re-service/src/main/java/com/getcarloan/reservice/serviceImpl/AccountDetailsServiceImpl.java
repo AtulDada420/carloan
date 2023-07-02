@@ -3,28 +3,29 @@ package com.getcarloan.reservice.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.getcarloan.reservice.entities.AccountDetails;
 import com.getcarloan.reservice.repository.AccountDetailsRepo;
 import com.getcarloan.reservice.service.AccountDetailsService;
 
+@Service
 public class AccountDetailsServiceImpl implements AccountDetailsService {
 
 	@Autowired
-	private  AccountDetailsRepo accrepo;
+	private AccountDetailsRepo accrepo;
 
 	@Override
-	public String saveAccountDetails(AccountDetails accountDetails) 
-	{
+	public String saveAccountDetails(AccountDetails accountDetails) {
 		accrepo.save(accountDetails);
 		return "Save New AccountDetails";
 	}
 
 	@Override
 	public AccountDetails getAllAccountDetailsByUserId(int userId) {
-		if(accrepo.existsgetAllAccountDetailsByUserId(userId)) 
+		if (accrepo.existsgetAllAccountDetailsByUserId(userId))
 			return accrepo.findById(userId).get();
-		else 
+		else
 			return null;
 	}
 
@@ -42,10 +43,8 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 
 	@Override
 	public List<AccountDetails> getAllAccountDetails() {
-	return	accrepo.findAll();
-		
+		return accrepo.findAll();
+
 	}
 
-	
-	
 }

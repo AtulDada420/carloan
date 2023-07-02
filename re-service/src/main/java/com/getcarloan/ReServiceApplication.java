@@ -22,13 +22,10 @@ public class ReServiceApplication {
 		System.out.println("carloan wroking");
 		System.out.println("carloan wroking");
 		System.out.println("carloan re-module added to git - shubham kaviskar ");
-<<<<<<< HEAD
+
 
 		System.out.println("carloan re-module added to git - Swapnali More ");
-		
 
-=======
->>>>>>> 9bef55e1871f6cf810647c0d158aa9b009c475f4
 		System.out.println("carloan wroking");
 
 	}

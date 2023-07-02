@@ -21,13 +21,6 @@ public class AllPersonalDocs {
 @GeneratedValue(strategy = GenerationType.AUTO)
 private int docId;
 
-private byte[] addressProof;
-private byte[] panCard;
-private byte[] itr;
-private byte[] adharCard;
-private byte[] photo;
-private byte[] Sign;
-private byte[] bankCheck;
 
 
 @Lob
@@ -44,6 +37,7 @@ private byte[] photo;
 private byte[] Sign;
 @Lob
 private byte[] bankCheck;
+
 @Lob
 
 private byte[] salarySlips;

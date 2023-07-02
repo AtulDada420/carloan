@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.repository.ReserviceRepo;
@@ -18,6 +19,9 @@ public class ReserviceServer implements ReserviceService {
 	private JavaMailSender sender;
 	@Autowired
 	private ReserviceRepo rerepo;
+	
+	
+	
 	
 	@Override
 	public EnquiryDetails getEnquiryByUserId(int userId) {
@@ -37,5 +41,14 @@ public class ReserviceServer implements ReserviceService {
 		rerepo.save(enquiryDetails);
 		return "New Enquiry Details Added";
 	}
+
+	@Override
+	public Customer getCustomerById(int cId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
 
 }

@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.getcarloan.reservice.entities.AccountDetails;
 import com.getcarloan.reservice.entities.AllPersonalDocs;
+import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
-
+import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
+import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.ReserviceService;
 import com.getcarloan.reservice.service.UserService;
 
@@ -36,7 +39,19 @@ public class ReserviceController {
 	@Autowired
 	private AllPersonalDocsService docservice;
 	
+<<<<<<< HEAD
 
+=======
+	@Autowired
+	private CustomerService customerservice;
+	
+	@Autowired
+	private AccountDetailsService  accservice;
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+>>>>>>> c80d4a07c80eb22c22ed2a816db6efac4c6a7b62
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
 		return new ResponseEntity <String> (reservice.createEnquiry(enquiryDetails),HttpStatus.CREATED);
@@ -104,7 +119,55 @@ public class ReserviceController {
 	public ResponseEntity<String> ioException() {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File not uploaded correctly");
 	}
-
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	@GetMapping("/getCustomerById/{cId}")
+	public ResponseEntity<Customer> getCustomerId(@PathVariable int cId) {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerById(cId));
 }
+
+	@PostMapping("/saveCustomer")
+	public ResponseEntity <String> saveCustomer(@RequestBody Customer customer){
+		return new ResponseEntity <String> (customerservice.saveCustomer(customer),HttpStatus.CREATED);
+
+	}
+	@GetMapping("/getAllCustomer")
+	public ResponseEntity<List<Customer>> getAllCustomer() {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllCustomer());
+}
+	@PutMapping("/updateCustomer")
+	public ResponseEntity <String> updateCustomer(@RequestBody Customer customer){
+		return new ResponseEntity <String> (customerservice.updateCustomer(customer),HttpStatus.OK);
+	}
+	@DeleteMapping("deleteCustomer/{cId}")
+	public ResponseEntity <String> deleteCustomer(@PathVariable int cId){
+		return new ResponseEntity <String>(customerservice.deleteCustomer(cId),HttpStatus.OK);
+}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	
 
+	@PostMapping("/saveAccountDetails")
+	public ResponseEntity <String> saveAccountDetails(@RequestBody AccountDetails accountDetails){
+		return new ResponseEntity <String> (accservice.saveAccountDetails(accountDetails),HttpStatus.CREATED);
+
+	}
+	@GetMapping("/getAllAccountDetailsById/{accountId}")
+	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
+}
+	@PutMapping("/updateAccountDetails")
+	public ResponseEntity <String> updateAccountDetails(@RequestBody AccountDetails accountDetails){
+		return new ResponseEntity <String> (accservice.updateAccountDetails(accountDetails),HttpStatus.OK);
+	}
+	@DeleteMapping("deleteAccountDetails/{accountId}")
+	public ResponseEntity <String> deleteAccountDetails(@PathVariable int accountId){
+		return new ResponseEntity <String>(accservice.deleteAccountDetails(accountId),HttpStatus.OK);
+}
+	@GetMapping("/getAllAccountDetails")
+	public ResponseEntity<List<AccountDetails>> getAllAccountDetails() {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetails());
+}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+}

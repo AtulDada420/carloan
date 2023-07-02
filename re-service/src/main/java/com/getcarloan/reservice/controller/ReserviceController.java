@@ -157,7 +157,7 @@ public class ReserviceController {
 		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllCustomer());
 	}
 
-	@PutMapping("/updateCustomer/{userId}")
+	@PostMapping("/updateCustomer/{userId}")
 	public ResponseEntity<String> updateCustomerByUserId(@PathVariable int userId) {
 		return new ResponseEntity<String>(customerservice.updateCustomerByUserId(userId), HttpStatus.OK);
 	}
@@ -179,7 +179,7 @@ public class ReserviceController {
 		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsByUserId(userId));
 	}
 
-	@PutMapping("/updateAccountDetails/{userId}")
+	@PostMapping("/updateAccountDetails/{userId}")
 	public ResponseEntity<String> updateAccountDetailsByUserId(@PathVariable int userId) {
 		return new ResponseEntity<String>(accservice.updateAccountDetailsByUserId(userId), HttpStatus.OK);
 	}

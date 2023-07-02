@@ -31,9 +31,11 @@ private byte[] adharCard;
 private byte[] photo;
 @Lob
 private byte[] Sign;
+
 @Lob
 private byte[] bankCheck;
 @Lob
 private byte[] salarySlips;
+
 
 }

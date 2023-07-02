@@ -7,7 +7,7 @@ import com.getcarloan.reservice.entities.AccountDetails;
 public interface AccountDetailsRepo  extends JpaRepository<AccountDetails, Integer>
 {
 
-	boolean existsgetAllAccountDetailsById(int accountId);
+	boolean existsgetAllAccountDetailsByUserId(int userId);
 
 	
 

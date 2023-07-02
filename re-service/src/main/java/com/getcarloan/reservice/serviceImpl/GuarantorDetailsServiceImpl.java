@@ -23,7 +23,7 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 
 	@Override
 	public GuarantorDetails getAllGuarantorDetailsByUserId(int userId) {
-		if (grepo.existsByUserId(userId)) {
+		if (grepo.existsById(userId)) {
 			return grepo.findById(userId).get();
 		} else
 			return new GuarantorDetails();

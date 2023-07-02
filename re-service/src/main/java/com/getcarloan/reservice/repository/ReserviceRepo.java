@@ -8,6 +8,4 @@ import com.getcarloan.reservice.entities.EnquiryDetails;
 @Repository
 public interface ReserviceRepo extends JpaRepository<EnquiryDetails, Integer> {
 
-	boolean existsByUserId(int userId);
-
 }

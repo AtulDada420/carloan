@@ -6,6 +6,4 @@ import com.getcarloan.reservice.entities.LoanPlans;
 
 public interface LoanPlansRepo extends JpaRepository<LoanPlans, Integer> {
 
-	boolean existsByuserId(int userId);
-
 }

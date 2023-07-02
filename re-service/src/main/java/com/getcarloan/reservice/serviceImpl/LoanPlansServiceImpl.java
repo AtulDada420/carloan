@@ -20,7 +20,7 @@ public class LoanPlansServiceImpl implements LoanPlansService {
 
 	@Override
 	public LoanPlans getAllLoanPlansByUserId(int userId) {
-		if(loanplanrepo.existsByuserId(userId)) {
+		if(loanplanrepo.existsById(userId)) {
 			return loanplanrepo.findById(userId).get();
 		}else
 			return null;

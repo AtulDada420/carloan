@@ -24,7 +24,7 @@ public class LoanDetailsServiceImpl implements LoanDetailsService{
 
 	@Override
 	public LoanDetails getAllLoanDetailsByUserId(int userId) {
-	if(loanrepo.existsByUserId(userId)) {
+	if(loanrepo.existsById(userId)) {
 	return loanrepo.findById(userId).get();
 	}
 	else

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.repository.UserRepo;
 import com.getcarloan.reservice.service.UserService;
@@ -34,7 +36,7 @@ public class UserServiceIMPL implements UserService {
 
 	@Override
 	public User getUserByUserId(int userId) {
-		if(usrepo.existsByUserId(userId)) 
+		if(usrepo.existsById(userId)) 
 			return usrepo.findById(userId).get();
 		else 
 			return null;

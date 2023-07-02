@@ -47,14 +47,6 @@ public class ReserviceController {
 	private UserService usrservice;
 	@Autowired
 	private AllPersonalDocsService docservice;
-<<<<<<< HEAD
-	@Autowired
-	private CustomerService customerservice;
-	@Autowired
-	private AccountDetailsService accservice;
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-=======
 
 	@Autowired
 	private CustomerService customerservice;
@@ -77,7 +69,6 @@ public class ReserviceController {
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 
 	@PostMapping("/createEnquiry")
 	public ResponseEntity<String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails) {
@@ -93,12 +84,7 @@ public class ReserviceController {
 	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
 	}
-<<<<<<< HEAD
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-=======
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 
 	@PostMapping("/saveUser")
 	public ResponseEntity<String> saveUser(@RequestBody User user) {
@@ -125,11 +111,7 @@ public class ReserviceController {
 		return new ResponseEntity<String>(usrservice.deleteUser(userId), HttpStatus.OK);
 	}
 
-<<<<<<< HEAD
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-=======
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 
 	@PostMapping("/saveDocument")
 	public ResponseEntity<String> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
@@ -146,13 +128,7 @@ public class ReserviceController {
 			doc.setSign(F6.getBytes());
 			doc.setBankCheque(F7.getBytes());
 			doc.setSalarySlips(F8.getBytes());
-<<<<<<< HEAD
-		}
-
-		catch (IOException e) {
-=======
 		} catch (IOException e) {
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 			e.printStackTrace();
 		}
 		docservice.saveDocument(doc);
@@ -163,20 +139,11 @@ public class ReserviceController {
 	public ResponseEntity<String> ioException() {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File not uploaded correctly");
 	}
-<<<<<<< HEAD
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@GetMapping("/getCustomerById/{cId}")
-	public ResponseEntity<Customer> getCustomerId(@PathVariable int cId) {
-		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerById(cId));
-=======
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@GetMapping("/getCustomerByUserId/{userId}")
 	public ResponseEntity<Customer> getCustomerId(@PathVariable int userId) {
 		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerByUserId(userId));
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 	}
 
 	@PostMapping("/saveCustomer")
@@ -189,29 +156,6 @@ public class ReserviceController {
 	public ResponseEntity<List<Customer>> getAllCustomer() {
 		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllCustomer());
 	}
-<<<<<<< HEAD
-
-	@PutMapping("/updateCustomer")
-	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
-		return new ResponseEntity<String>(customerservice.updateCustomer(customer), HttpStatus.OK);
-	}
-
-	@DeleteMapping("deleteCustomer/{cId}")
-	public ResponseEntity<String> deleteCustomer(@PathVariable int cId) {
-		return new ResponseEntity<String>(customerservice.deleteCustomer(cId), HttpStatus.OK);
-	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@PostMapping("/saveAccountDetails")
-	public ResponseEntity<String> saveAccountDetails(@RequestBody AccountDetails accountDetails) {
-		return new ResponseEntity<String>(accservice.saveAccountDetails(accountDetails), HttpStatus.CREATED);
-	}
-
-	@GetMapping("/getAllAccountDetailsById/{accountId}")
-	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
-=======
 
 	@PutMapping("/updateCustomer")
 	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
@@ -233,7 +177,6 @@ public class ReserviceController {
 	@GetMapping("/getAllAccountDetailsByUserId/{userId}")
 	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int userId) {
 		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsByUserId(userId));
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 	}
 
 	@PutMapping("/updateAccountDetails")
@@ -241,28 +184,15 @@ public class ReserviceController {
 		return new ResponseEntity<String>(accservice.updateAccountDetails(accountDetails), HttpStatus.OK);
 	}
 
-<<<<<<< HEAD
-	@DeleteMapping("deleteAccountDetails/{accountId}")
-	public ResponseEntity<String> deleteAccountDetails(@PathVariable int accountId) {
-		return new ResponseEntity<String>(accservice.deleteAccountDetails(accountId), HttpStatus.OK);
-=======
 	@DeleteMapping("deleteAccountDetails/{userId}")
 	public ResponseEntity<String> deleteAccountDetails(@PathVariable int userId) {
 		return new ResponseEntity<String>(accservice.deleteAccountDetails(userId), HttpStatus.OK);
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 	}
 
 	@GetMapping("/getAllAccountDetails")
 	public ResponseEntity<List<AccountDetails>> getAllAccountDetails() {
 		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetails());
 	}
-<<<<<<< HEAD
-	
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-=======
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/saveCustomerAddress")
@@ -373,5 +303,4 @@ public ResponseEntity<LoanPlans>getAllLoanPlansByUserId(@PathVariable int userId
 
 
 
->>>>>>> 24294482e9755fe4ce7e1226f48e864a66cc5666
 }

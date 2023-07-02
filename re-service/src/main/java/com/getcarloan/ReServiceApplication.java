@@ -10,7 +10,7 @@ public class ReServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReServiceApplication.class, args);
-	    System.out.println("\nCar Loan APP Initiated.");
+	    System.out.println("\nCar Loan App Initiated \r");
 	}
 
 }

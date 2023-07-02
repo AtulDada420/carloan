@@ -8,6 +8,4 @@ import com.getcarloan.reservice.entities.LoanDetails;
 @Repository
 public interface LoanDetailsRepo extends JpaRepository<LoanDetails, Integer> {
 
-	boolean existsByUserId(int userId);
-
 }

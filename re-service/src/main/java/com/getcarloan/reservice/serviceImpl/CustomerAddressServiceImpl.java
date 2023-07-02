@@ -19,9 +19,9 @@ public class CustomerAddressServiceImpl implements CustomerAddressService{
 	}
 
 	@Override
-	public CustomerAddress CustomerAddressById(int addId) {
-		if(caddrepo.existsCustomerAddressById(addId)) 
-			return caddrepo.findById(addId).get();
+	public CustomerAddress CustomerAddressByUserId(int userId) {
+		if(caddrepo.existsCustomerAddressByUserId(userId)) 
+			return caddrepo.findById(userId).get();
 			else return new CustomerAddress();
 	}
 @Override
@@ -31,8 +31,8 @@ public class CustomerAddressServiceImpl implements CustomerAddressService{
 	}
 
 @Override
-public String deleteCustomer(int addId) {
-	caddrepo.deleteById(addId);
+public String deleteCustomer(int userId) {
+	caddrepo.deleteById(userId);
 	return "Customer Deleted By ID";
 }
 

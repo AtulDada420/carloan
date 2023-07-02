@@ -14,16 +14,16 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	private  AccountDetailsRepo accrepo;
 
 	@Override
-	public String saveAccountDetails(AccountDetails accountdetails) 
+	public String saveAccountDetails(AccountDetails accountDetails) 
 	{
-		accrepo.save(accountdetails);
+		accrepo.save(accountDetails);
 		return "Save New AccountDetails";
 	}
 
 	@Override
-	public AccountDetails getAllAccountDetailsById(int accountId) {
-		if(accrepo.existsgetAllAccountDetailsById(accountId)) 
-			return accrepo.findById(accountId).get();
+	public AccountDetails getAllAccountDetailsByUserId(int userId) {
+		if(accrepo.existsgetAllAccountDetailsByUserId(userId)) 
+			return accrepo.findById(userId).get();
 		else 
 			return null;
 	}
@@ -35,8 +35,8 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	}
 
 	@Override
-	public String deleteAccountDetails(int accountId) {
-		accrepo.deleteById(accountId);
+	public String deleteAccountDetails(int userId) {
+		accrepo.deleteById(userId);
 		return "AccountDetails Deleted";
 	}
 
@@ -45,5 +45,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	return	accrepo.findAll();
 		
 	}
+
+	
 	
 }

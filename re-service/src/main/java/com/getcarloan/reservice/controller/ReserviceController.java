@@ -27,6 +27,7 @@ import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
 import com.getcarloan.reservice.service.CustomerAddressService;
 import com.getcarloan.reservice.service.CustomerService;
+import com.getcarloan.reservice.service.GuarantorDetailsService;
 import com.getcarloan.reservice.service.ReserviceService;
 import com.getcarloan.reservice.service.UserService;
 
@@ -41,9 +42,7 @@ public class ReserviceController {
 	@Autowired
 	private AllPersonalDocsService docservice;
 	
-<<<<<<< HEAD
 
-=======
 	@Autowired
 	private CustomerService customerservice;
 	
@@ -54,9 +53,12 @@ public class ReserviceController {
 	private CustomerAddressService caddservice;
 	
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Autowired
+	private GuarantorDetailsService guarantorservice;
 	
->>>>>>> c80d4a07c80eb22c22ed2a816db6efac4c6a7b62
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
 		return new ResponseEntity <String> (reservice.createEnquiry(enquiryDetails),HttpStatus.CREATED);
@@ -70,6 +72,7 @@ public class ReserviceController {
 	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
 	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@PostMapping("/saveUser")
 	public ResponseEntity <String> saveUser(@RequestBody User user){
@@ -96,6 +99,7 @@ public class ReserviceController {
 		return new ResponseEntity <String>(usrservice.deleteUser(userId),HttpStatus.OK);
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@PostMapping("/saveDocument")
 	public ResponseEntity<String> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
@@ -129,7 +133,7 @@ public class ReserviceController {
 	
 	@GetMapping("/getCustomerByUserId/{userId}")
 	public ResponseEntity<Customer> getCustomerId(@PathVariable int userId) {
-		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerById(userId));
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerByUserId(userId));
 }
 
 	@PostMapping("/saveCustomer")
@@ -160,7 +164,7 @@ public class ReserviceController {
 	}
 	@GetMapping("/getAllAccountDetailsByUserId/{userId}")
 	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int userId) {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(userId));
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsByUserId(userId));
 }
 	@PutMapping("/updateAccountDetails")
 	public ResponseEntity <String> updateAccountDetails(@RequestBody AccountDetails accountDetails){
@@ -184,7 +188,7 @@ public ResponseEntity<String>saveCustomerAddress(@RequestBody CustomerAddress cu
 }
 @GetMapping("/CustomerAddressByUserId")
 public ResponseEntity<CustomerAddress>CustomerAddressById(@PathVariable int userId){
-	return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressById(userId),HttpStatus.OK);
+	return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressByUserId(userId),HttpStatus.OK);
 }
 
 @PutMapping("/updateCustomerAddress")
@@ -196,11 +200,9 @@ public ResponseEntity <String> updateCustomerAddress(@RequestBody CustomerAddres
 public ResponseEntity <String> deleteCustomerAddress(@PathVariable int userId){
 	return new ResponseEntity <String>(caddservice.deleteCustomer(userId),HttpStatus.OK);
 
-
-
 }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

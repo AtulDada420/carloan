@@ -15,6 +15,8 @@ import com.getcarloan.reservice.service.ReserviceService;
 
 @Service
 public class ReserviceServer implements ReserviceService {
+	
+	
 	@Autowired
 	private JavaMailSender sender;
 	@Autowired
@@ -42,12 +44,7 @@ public class ReserviceServer implements ReserviceService {
 		return "New Enquiry Details Added";
 	}
 
-	@Override
-	public Customer getCustomerById(int cId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	
 	
 

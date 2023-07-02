@@ -6,11 +6,13 @@ public interface CustomerAddressService {
 
 	String saveCustomerAddress(CustomerAddress customerAdress);
 
-	CustomerAddress CustomerAddressById(int addId);
+	CustomerAddress CustomerAddressByUserId(int userId);
 
 	String updateCustomerAddress(CustomerAddress customerAddress);
 
-	String deleteCustomer(int addId);
+	String deleteCustomer(int userId);
+
+
 
 
 }

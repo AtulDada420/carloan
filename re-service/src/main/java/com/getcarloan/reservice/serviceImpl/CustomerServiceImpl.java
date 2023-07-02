@@ -16,8 +16,6 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private JavaMailSender sender;
 	
-	
-	
 	@Override
 	public Customer getCustomerById(int cId) {
 		if(crepo.existsCustomerById(cId)) 

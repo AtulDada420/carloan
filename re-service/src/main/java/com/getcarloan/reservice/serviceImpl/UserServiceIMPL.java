@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
-import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.repository.UserRepo;
 import com.getcarloan.reservice.service.UserService;

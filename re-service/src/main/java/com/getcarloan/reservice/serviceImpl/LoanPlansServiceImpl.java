@@ -1,5 +1,7 @@
 package com.getcarloan.reservice.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +21,31 @@ public class LoanPlansServiceImpl implements LoanPlansService {
 	}
 
 	@Override
-	public LoanPlans getAllLoanPlansByUserId(int userId) {
+	public LoanPlans getLoanPlansByUserId(int userId) {
 		if(loanplanrepo.existsByuserId(userId)) {
 			return loanplanrepo.findById(userId).get();
 		}else
 			return null;
 		
 	}
+
+	@Override
+	public String updateLoanPlansByUserId(int userId) {
+		loanplanrepo.save(userId);
+		return "Update Loan Plans";
+	}
+
+	@Override
+	public String deleteLoanPlansByUserId(int userId) {
+		loanplanrepo.deleteById(userId);
+		return "Delete LoanPlans";
+	}
+
+	@Override
+	public List<LoanPlans> getAllLoanPlans() {
+		return loanplanrepo.findAll();
+	}
+
 	
 	
 	

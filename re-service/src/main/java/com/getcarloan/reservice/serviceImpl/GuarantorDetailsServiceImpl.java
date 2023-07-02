@@ -22,7 +22,7 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 	}
 
 	@Override
-	public GuarantorDetails getAllGuarantorDetailsByUserId(int userId) {
+	public GuarantorDetails getGuarantorDetailsByUserId(int userId) {
 		if (grepo.existsByUserId(userId)) {
 			return grepo.findById(userId).get();
 		} else
@@ -30,11 +30,7 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 
 	}
 
-	@Override
-	public String updateGuarantorDetails(GuarantorDetails guarantorDetails) {
-		grepo.save(guarantorDetails);
-		return "Update Guarantor Details";
-	}
+	
 
 	@Override
 	public String deleteGuarantorDetailsByUserId(int userId) {
@@ -46,6 +42,12 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 	public List<GuarantorDetails> getAllGuarantorDetails() {
 		return grepo.findAll();
 
+	}
+
+	@Override
+	public String updateGuarantorDetailsByUserId(int userId) {
+		grepo.save(userId);
+		return "Update guarantor";
 	}
 
 }

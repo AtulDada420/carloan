@@ -10,4 +10,6 @@ public interface GuarantorDetailsRepo extends JpaRepository<GuarantorDetails, In
 
 	boolean existsByUserId(int userId);
 
+	String save(int userId);
+
 }

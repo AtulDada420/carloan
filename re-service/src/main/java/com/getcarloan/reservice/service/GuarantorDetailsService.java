@@ -12,13 +12,18 @@ public interface GuarantorDetailsService {
 
 	String saveGuarantorDetails(GuarantorDetails guarantorDetails);
 
-	GuarantorDetails getAllGuarantorDetailsByUserId(int userId);
 
-	String updateGuarantorDetails(GuarantorDetails guarantorDetails);
+	GuarantorDetails getGuarantorDetailsByUserId(int userId);
 
 	String deleteGuarantorDetailsByUserId(int userId);
 
 	List<GuarantorDetails> getAllGuarantorDetails();
+
+	String updateGuarantorDetailsByUserId(int userId);
+
+
+	
+
 
 
 

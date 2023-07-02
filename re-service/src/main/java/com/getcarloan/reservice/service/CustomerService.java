@@ -13,9 +13,12 @@ public interface CustomerService {
 
 	List<Customer> getAllCustomer();
 
-	String updateCustomer(Customer customer);
 
 	String deleteCustomer(int userId);
+
+	String updateCustomerByUserId(int userId);
+
+	
 
 	
 	

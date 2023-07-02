@@ -1,6 +1,7 @@
 package com.getcarloan.reservice.service;
 
 import com.getcarloan.reservice.entities.CustomerAddress;
+import com.getcarloan.reservice.entities.GuarantorDetails;
 
 public interface CustomerAddressService {
 
@@ -11,6 +12,8 @@ public interface CustomerAddressService {
 	String updateCustomerAddress(CustomerAddress customerAddress);
 
 	String deleteCustomer(int userId);
+
+	
 
 
 

@@ -1,4 +1,4 @@
-package com.getcarloan.oe.service.entites;
+package com.getcarloan.oe_service.entites;
 
 import lombok.Data;
 

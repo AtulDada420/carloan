@@ -31,11 +31,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.getcarloan.reservice.entities.AccountDetails;
 import com.getcarloan.reservice.entities.AllPersonalDocs;
 import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
-
+import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
 import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.ReserviceService;
@@ -57,9 +58,19 @@ public class ReserviceController {
 	@Autowired
 	private AllPersonalDocsService docservice;
 	
+<<<<<<< HEAD
+
+=======
 	@Autowired
 	private CustomerService customerservice;
 	
+	@Autowired
+	private AccountDetailsService  accservice;
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+>>>>>>> c80d4a07c80eb22c22ed2a816db6efac4c6a7b62
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
 		return new ResponseEntity <String> (reservice.createEnquiry(enquiryDetails),HttpStatus.CREATED);
@@ -69,7 +80,6 @@ public class ReserviceController {
 	public ResponseEntity<EnquiryDetails> getEnquiryByUserId(@PathVariable int userId) {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getEnquiryByUserId(userId));
 	}
-	
 	@GetMapping("/getAllEnquiry")
 
 	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
@@ -100,7 +110,10 @@ public class ReserviceController {
 	public ResponseEntity <String> deleteUser(@PathVariable int userId){
 		return new ResponseEntity <String>(usrservice.deleteUser(userId),HttpStatus.OK);
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c87cf17892e26c9ed4d844a2aa1bbee039726ec9
 
 	
 	@PostMapping("/saveDocument")
@@ -116,7 +129,7 @@ public class ReserviceController {
 			doc.setAdharCard(F4.getBytes());
 			doc.setPhoto(F5.getBytes());
 			doc.setSign(F6.getBytes());
-			doc.setBankCheck(F7.getBytes());
+			doc.setBankCheque(F7.getBytes());
 			doc.setSalarySlips(F8.getBytes());
 		}
 		catch (IOException e) {
@@ -157,4 +170,28 @@ public class ReserviceController {
 }
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	
+
+	@PostMapping("/saveAccountDetails")
+	public ResponseEntity <String> saveAccountDetails(@RequestBody AccountDetails accountDetails){
+		return new ResponseEntity <String> (accservice.saveAccountDetails(accountDetails),HttpStatus.CREATED);
+
+	}
+	@GetMapping("/getAllAccountDetailsById/{accountId}")
+	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
+}
+	@PutMapping("/updateAccountDetails")
+	public ResponseEntity <String> updateAccountDetails(@RequestBody AccountDetails accountDetails){
+		return new ResponseEntity <String> (accservice.updateAccountDetails(accountDetails),HttpStatus.OK);
+	}
+	@DeleteMapping("deleteAccountDetails/{accountId}")
+	public ResponseEntity <String> deleteAccountDetails(@PathVariable int accountId){
+		return new ResponseEntity <String>(accservice.deleteAccountDetails(accountId),HttpStatus.OK);
+}
+	@GetMapping("/getAllAccountDetails")
+	public ResponseEntity<List<AccountDetails>> getAllAccountDetails() {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetails());
+}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -8,23 +8,19 @@ import org.springframework.stereotype.Service;
 import com.getcarloan.oe_service.communication.FiegnClientCommunication;
 import com.getcarloan.oe_service.dto.CustomerDto;
 import com.getcarloan.oe_service.entites.Customer;
-import com.getcarloan.oe_service.repository.CustomerRepository;
+
 
 @Service
 public class CustomerServiceIMPL implements CustomerService{
 	
-	@Autowired
-	private CustomerRepository repo;
 	
 	@Autowired
 	private FiegnClientCommunication communication;
-	
-
 
 	@Override
 	public List<Customer> viewAllCustomer() {
 		// TODO Auto-generated method stub
-		return repo.findAll();
+		return null;
 	}
 
 	@Override
@@ -33,6 +29,8 @@ public class CustomerServiceIMPL implements CustomerService{
 		return null;
 	}
 	
+
+
 	
 
 }

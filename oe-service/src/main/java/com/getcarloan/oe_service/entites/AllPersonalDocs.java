@@ -1,4 +1,4 @@
-package com.getcarloan.reservice.entities;
+package com.getcarloan.oe_service.entites;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,21 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Lob;
-import javax.persistence.SequenceGenerator;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class AllPersonalDocs {
-@Id
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "docs_generator")
-@SequenceGenerator(name = "docs_generator", sequenceName = "DOCUMENTS_SEQUENCE",initialValue=888,allocationSize = 0)
+
 private int docId;
 
 
@@ -36,14 +30,10 @@ private byte[] adharCard;
 @Lob
 private byte[] photo;
 @Lob
-private byte[] sign;
+private byte[] Sign;
 @Lob
-<<<<<<< HEAD
 private byte[] bankCheck;
 
-=======
-private byte[] bankCheque;
->>>>>>> c87cf17892e26c9ed4d844a2aa1bbee039726ec9
 @Lob
 
 private byte[] salarySlips;

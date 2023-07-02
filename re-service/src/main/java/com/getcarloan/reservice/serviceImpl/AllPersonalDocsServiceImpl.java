@@ -2,6 +2,7 @@ package com.getcarloan.reservice.serviceImpl;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.getcarloan.reservice.entities.AllPersonalDocs;
@@ -10,7 +11,7 @@ import com.getcarloan.reservice.service.AllPersonalDocsService;
 
 @Service
 public class AllPersonalDocsServiceImpl implements AllPersonalDocsService{
-	
+	@Autowired
  private AllPersonalDocsRepository repo;
 
 	@Override

@@ -1,6 +1,6 @@
 package com.getcarloan.reservice.controller;
 
-<<<<<<< HEAD
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.service.ReserviceService;
-=======
+
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
 import com.getcarloan.reservice.service.ReserviceService;
 import com.getcarloan.reservice.service.UserService;
->>>>>>> 9bef55e1871f6cf810647c0d158aa9b009c475f4
+
 
 @RestController
 @RequestMapping("/ReService")
@@ -46,14 +46,10 @@ public class ReserviceController {
 
 	@Autowired
 	private ReserviceService reservice;
-<<<<<<< HEAD
+
 	
-	@GetMapping("getEnquiryByUserId/{userId}")
-	public ResponseEntity<EnquiryDetails> getEnquiryByUserId(@PathVariable int userId) {
-		return ResponseEntity.status(HttpStatus.OK).body(reservice.getEnquiryByUserId(userId));
-	}
-	@GetMapping("getAllEnquiry")
-=======
+	
+
 	@Autowired
 	private UserService usrservice;
 	@Autowired
@@ -71,17 +67,10 @@ public class ReserviceController {
 	}
 	
 	@GetMapping("/getAllEnquiry")
->>>>>>> 9bef55e1871f6cf810647c0d158aa9b009c475f4
+
 	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
 	}
-	
-<<<<<<< HEAD
-	
-	
-}
-=======
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	@PostMapping("/saveUser")
 	public ResponseEntity <String> saveUser(@RequestBody User user){
@@ -108,7 +97,7 @@ public class ReserviceController {
 		return new ResponseEntity <String>(usrservice.deleteUser(userId),HttpStatus.OK);
 	}
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
 	
 	@PostMapping("/saveDocument")
 	public ResponseEntity<String> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
@@ -141,4 +130,3 @@ public class ReserviceController {
 }
 	
 
->>>>>>> 9bef55e1871f6cf810647c0d158aa9b009c475f4

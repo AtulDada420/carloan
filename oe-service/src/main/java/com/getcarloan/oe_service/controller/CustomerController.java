@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.getcarloan.oe_service.communication.FiegnClientCommunication;
 import com.getcarloan.oe_service.dto.CustomerDto;
+import com.getcarloan.oe_service.entites.Customer;
 import com.getcarloan.oe_service.service.CustomerService;
 
 
@@ -37,8 +38,8 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/viewAllCustomer")
-	public ResponseEntity<List<CustomerDto>> viewAllCustomer() {
-		return new ResponseEntity<List<CustomerDto>>(service.viewAllCustomer(), HttpStatus.OK);
+	public ResponseEntity<List<Customer>> viewAllCustomer() {
+		return new ResponseEntity<List<Customer>>(service.viewAllCustomer(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/viewCustomerById/{customerId}")

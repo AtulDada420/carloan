@@ -22,6 +22,7 @@ import com.getcarloan.reservice.entities.AllPersonalDocs;
 import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.entities.CustomerAddress;
 import com.getcarloan.reservice.entities.EnquiryDetails;
+import com.getcarloan.reservice.entities.GuarantorDetails;
 import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
@@ -204,10 +205,16 @@ public ResponseEntity <String> deleteCustomerAddress(@PathVariable int userId){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@PostMapping("/saveGuarantorDetails")
+public ResponseEntity<String> saveGuarantorDetails(@RequestBody GuarantorDetails guarantorDetails){
+	return new ResponseEntity<String>(guarantorservice.saveGuarantorDetails(guarantorDetails),HttpStatus.CREATED);
+}
 
 
-
-
+@GetMapping("/getAllGuarantorDetailsByUserId/{userId}")
+public ResponseEntity<GuarantorDetails> getAllGuarantorDetailsByUserId(@PathVariable int userId) {
+	return new ResponseEntity<GuarantorDetails>(guarantorservice.getAllGuarantorDetailsByUserId(userId),HttpStatus.OK);
+}
 
 
 

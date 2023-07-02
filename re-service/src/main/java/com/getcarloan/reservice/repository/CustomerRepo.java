@@ -6,6 +6,6 @@ import com.getcarloan.reservice.entities.Customer;
 
 public interface CustomerRepo extends JpaRepository<Customer, Integer>{
 
-	boolean existsCustomerById(int cId);
+	//boolean existsCustomerById(int cId);
 
 }

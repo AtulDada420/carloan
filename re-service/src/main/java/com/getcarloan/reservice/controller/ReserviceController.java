@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.getcarloan.reservice.entities.AccountDetails;
 import com.getcarloan.reservice.entities.AllPersonalDocs;
 import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
-
+import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
 import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.ReserviceService;
@@ -39,8 +40,10 @@ public class ReserviceController {
 	private AllPersonalDocsService docservice;
 	@Autowired
 	private CustomerService customerservice;
+	@Autowired
+	private AccountDetailsService accservice;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/createEnquiry")
 	public ResponseEntity<String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails) {
@@ -145,4 +148,33 @@ public class ReserviceController {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	@PostMapping("/saveAccountDetails")
+	public ResponseEntity<String> saveAccountDetails(@RequestBody AccountDetails accountDetails) {
+		return new ResponseEntity<String>(accservice.saveAccountDetails(accountDetails), HttpStatus.CREATED);
+	}
+
+	@GetMapping("/getAllAccountDetailsById/{accountId}")
+	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
+	}
+
+	@PutMapping("/updateAccountDetails")
+	public ResponseEntity<String> updateAccountDetails(@RequestBody AccountDetails accountDetails) {
+		return new ResponseEntity<String>(accservice.updateAccountDetails(accountDetails), HttpStatus.OK);
+	}
+
+	@DeleteMapping("deleteAccountDetails/{accountId}")
+	public ResponseEntity<String> deleteAccountDetails(@PathVariable int accountId) {
+		return new ResponseEntity<String>(accservice.deleteAccountDetails(accountId), HttpStatus.OK);
+	}
+
+	@GetMapping("/getAllAccountDetails")
+	public ResponseEntity<List<AccountDetails>> getAllAccountDetails() {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetails());
+	}
+	
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 }

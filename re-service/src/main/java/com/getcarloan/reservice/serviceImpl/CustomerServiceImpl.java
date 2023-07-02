@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-
+import org.springframework.stereotype.Service;
 import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.repository.CustomerRepo;
 import com.getcarloan.reservice.service.CustomerService;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
@@ -18,10 +19,11 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer getCustomerById(int cId) {
-		if(crepo.existsCustomerById(cId)) 
+		if(crepo.existsById(cId)) 
 			return crepo.findById(cId).get();
 			else return new Customer();
 	}
+	
 	@Override
 	public String saveCustomer(Customer customer) {
 		crepo.save(customer);

@@ -5,14 +5,14 @@ import java.util.List;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
 
-public interface ReserviceService {
+public interface UserService {
 
-	EnquiryDetails getEnquiryByUserId(int userId);
+	String saveUser(User user);
 
-	List<EnquiryDetails>  getAllEnquiry();
+	User getUserByUserId(int userId);
 
-	String createEnquiry(EnquiryDetails enquiryDetails);
+	List<User> getAllUsers();
 
+	String deleteUser(int userId);
 	
-
 }

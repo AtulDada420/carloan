@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -21,6 +23,7 @@ import com.getcarloan.reservice.entities.User;
 
 import com.getcarloan.reservice.service.AllPersonalDocsService;
 import com.getcarloan.reservice.service.ReserviceService;
+import com.getcarloan.reservice.service.UserService;
 
 @RestController
 @RequestMapping("/ReService")
@@ -28,30 +31,55 @@ public class ReserviceController {
 
 	@Autowired
 	private ReserviceService reservice;
-	
 	@Autowired
-	private AllPersonalDocsService service;
-
+	private UserService usrservice;
+	@Autowired
+	private AllPersonalDocsService docservice;
 	
-	@GetMapping("/getEnquiryByUserId/{userId}")
-	public ResponseEntity<EnquiryDetails> getEnquiryByUserId(@PathVariable int userId) {
-		return ResponseEntity.status(HttpStatus.OK).body(reservice.getEnquiryByUserId(userId));
-	}
-	@GetMapping("/getAllEnquiry")
-	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
-		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
-	}
 	
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
 		return new ResponseEntity <String> (reservice.createEnquiry(enquiryDetails),HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/saveUser")
-	public ResponseEntity <String> saveUser(@RequestBody User user){
-		return new ResponseEntity <String> (reservice.saveUser(user),HttpStatus.CREATED);
+	@GetMapping("/getEnquiryByUserId/{userId}")
+	public ResponseEntity<EnquiryDetails> getEnquiryByUserId(@PathVariable int userId) {
+		return ResponseEntity.status(HttpStatus.OK).body(reservice.getEnquiryByUserId(userId));
 	}
 	
+	@GetMapping("/getAllEnquiry")
+	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
+		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
+	}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	@PostMapping("/saveUser")
+	public ResponseEntity <String> saveUser(@RequestBody User user){
+		return new ResponseEntity <String> (usrservice.saveUser(user),HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/updateUser")
+	public ResponseEntity <String> updateUser(@RequestBody User user){
+		return new ResponseEntity <String> (usrservice.saveUser(user),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getUserByUserId/{userId}")
+	public ResponseEntity<User> getUserByUserId(@PathVariable int userId) {
+		return ResponseEntity.status(HttpStatus.OK).body(usrservice.getUserByUserId(userId));
+	}
+	
+	@GetMapping("/getAllUsers")
+	public ResponseEntity<List<User>> getAllUsers() {
+		return ResponseEntity.status(HttpStatus.OK).body(usrservice.getAllUsers());
+	}
+	
+	@DeleteMapping("deleteUser/{userId}")
+	public ResponseEntity <String> deleteUser(@PathVariable int userId){
+		return new ResponseEntity <String>(usrservice.deleteUser(userId),HttpStatus.OK);
+	}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	@PostMapping("/saveDocument")
 	public ResponseEntity<String> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
@@ -60,7 +88,6 @@ public class ReserviceController {
 		
 		AllPersonalDocs doc = new AllPersonalDocs();
 		try {
-
 			doc.setAddressProof(F1.getBytes());
 			doc.setPanCard(F2.getBytes());
 			doc.setItr(F3.getBytes());
@@ -73,7 +100,7 @@ public class ReserviceController {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		service.saveDocument(doc);
+		docservice.saveDocument(doc);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Document uploaded");
 	}
 

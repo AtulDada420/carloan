@@ -10,4 +10,6 @@ public interface CustomerAddressRepo extends JpaRepository<CustomerAddress, Inte
 
 	boolean existsCustomerAddressByUserId(int userId);
 
+	String save(int userId);
+
 }

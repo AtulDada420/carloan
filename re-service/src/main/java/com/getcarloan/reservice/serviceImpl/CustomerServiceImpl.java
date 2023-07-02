@@ -33,10 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> getAllCustomer() {
 		return crepo.findAll();
 	}
-
-	@Override
-	public String updateCustomer(Customer customer) {
-		crepo.save(customer);
+     @Override
+	public String updateCustomerByUserId(int userId) {
+		crepo.save(userId);
 		return "Upadate Customer";
 
 	}

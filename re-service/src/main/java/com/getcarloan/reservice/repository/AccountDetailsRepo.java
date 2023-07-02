@@ -10,4 +10,6 @@ public interface AccountDetailsRepo extends JpaRepository<AccountDetails, Intege
 
 	boolean existsgetAllAccountDetailsByUserId(int userId);
 
+	String save(int userId);
+
 }

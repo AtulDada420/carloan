@@ -9,11 +9,10 @@ public interface CustomerAddressService {
 
 	CustomerAddress CustomerAddressByUserId(int userId);
 
-	String updateCustomerAddress(CustomerAddress customerAddress);
 
-	String deleteCustomer(int userId);
+	String updateCustomerAddressByUserId(int userId);
 
-	
+	String deleteCustomerAddressByUserId(int userId);
 
 
 

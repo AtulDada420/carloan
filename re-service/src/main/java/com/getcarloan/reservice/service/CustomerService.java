@@ -3,8 +3,6 @@ package com.getcarloan.reservice.service;
 
 
 import java.util.List;
-
-import com.getcarloan.reservice.entities.AccountDetails;
 import com.getcarloan.reservice.entities.Customer;
 
 public interface CustomerService {

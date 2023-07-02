@@ -34,10 +34,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.getcarloan.reservice.entities.AccountDetails;
 import com.getcarloan.reservice.entities.AllPersonalDocs;
 import com.getcarloan.reservice.entities.Customer;
+import com.getcarloan.reservice.entities.CustomerAddress;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
+import com.getcarloan.reservice.service.CustomerAddressService;
 import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.ReserviceService;
 import com.getcarloan.reservice.service.UserService;
@@ -64,6 +66,9 @@ public class ReserviceController {
 	
 	@Autowired
 	private AccountDetailsService  accservice;
+	
+	@Autowired
+	private CustomerAddressService caddservice;
 	
 	
 	
@@ -139,9 +144,9 @@ public class ReserviceController {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	@GetMapping("/getCustomerById/{cId}")
-	public ResponseEntity<Customer> getCustomerId(@PathVariable int cId) {
-		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerById(cId));
+	@GetMapping("/getCustomerByUserId/{userId}")
+	public ResponseEntity<Customer> getCustomerId(@PathVariable int userId) {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerById(userId));
 }
 
 	@PostMapping("/saveCustomer")
@@ -157,9 +162,9 @@ public class ReserviceController {
 	public ResponseEntity <String> updateCustomer(@RequestBody Customer customer){
 		return new ResponseEntity <String> (customerservice.updateCustomer(customer),HttpStatus.OK);
 	}
-	@DeleteMapping("deleteCustomer/{cId}")
-	public ResponseEntity <String> deleteCustomer(@PathVariable int cId){
-		return new ResponseEntity <String>(customerservice.deleteCustomer(cId),HttpStatus.OK);
+	@DeleteMapping("deleteCustomer/{userId}")
+	public ResponseEntity <String> deleteCustomer(@PathVariable int userId){
+		return new ResponseEntity <String>(customerservice.deleteCustomer(userId),HttpStatus.OK);
 }
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -170,21 +175,61 @@ public class ReserviceController {
 		return new ResponseEntity <String> (accservice.saveAccountDetails(accountDetails),HttpStatus.CREATED);
 
 	}
-	@GetMapping("/getAllAccountDetailsById/{accountId}")
-	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
+	@GetMapping("/getAllAccountDetailsByUserId/{userId}")
+	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int userId) {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(userId));
 }
 	@PutMapping("/updateAccountDetails")
 	public ResponseEntity <String> updateAccountDetails(@RequestBody AccountDetails accountDetails){
 		return new ResponseEntity <String> (accservice.updateAccountDetails(accountDetails),HttpStatus.OK);
 	}
-	@DeleteMapping("deleteAccountDetails/{accountId}")
-	public ResponseEntity <String> deleteAccountDetails(@PathVariable int accountId){
-		return new ResponseEntity <String>(accservice.deleteAccountDetails(accountId),HttpStatus.OK);
+	@DeleteMapping("deleteAccountDetails/{userId}")
+	public ResponseEntity <String> deleteAccountDetails(@PathVariable int userId){
+		return new ResponseEntity <String>(accservice.deleteAccountDetails(userId),HttpStatus.OK);
 }
 	@GetMapping("/getAllAccountDetails")
 	public ResponseEntity<List<AccountDetails>> getAllAccountDetails() {
 		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetails());
 }
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@PostMapping("/saveCustomerAddress")
+public ResponseEntity<String>saveCustomerAddress(@RequestBody CustomerAddress customerAddress){
+	
+	return new ResponseEntity<String>(caddservice.saveCustomerAddress(customerAddress),HttpStatus.CREATED);
+	
+}
+@GetMapping("/CustomerAddressByUserId")
+public ResponseEntity<CustomerAddress>CustomerAddressById(@PathVariable int userId){
+	return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressById(userId),HttpStatus.OK);
+}
+
+@PutMapping("/updateCustomerAddress")
+public ResponseEntity <String> updateCustomerAddress(@RequestBody CustomerAddress customerAddress){
+	return new ResponseEntity <String> (caddservice.updateCustomerAddress(customerAddress),HttpStatus.OK);
+}
+
+@DeleteMapping("deleteCustomerAddress/{userId}")
+public ResponseEntity <String> deleteCustomerAddress(@PathVariable int userId){
+	return new ResponseEntity <String>(caddservice.deleteCustomer(userId),HttpStatus.OK);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

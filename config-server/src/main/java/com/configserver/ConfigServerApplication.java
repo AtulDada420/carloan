@@ -11,6 +11,8 @@ public class ConfigServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ConfigServerApplication.class, args);
 		System.out.println("\nConfig Server Initiated \r");
+		System.out.println("\nConfig Server Initiated \r");
+		
 	}
 
 }

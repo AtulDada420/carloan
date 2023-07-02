@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class LoanPlans {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int planID;
 	private int silver;
 	private int gold;

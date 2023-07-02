@@ -20,11 +20,11 @@ public class ReserviceController {
 	@Autowired
 	private ReserviceService reservice;
 	
-	@GetMapping("getEnquiryByUserId/{userId}")
+	@GetMapping("/getEnquiryByUserId/{userId}")
 	public ResponseEntity<EnquiryDetails> getEnquiryByUserId(@PathVariable int userId) {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getEnquiryByUserId(userId));
 	}
-	@GetMapping("getAllEnquiry")
+	@GetMapping("/getAllEnquiry")
 	public ResponseEntity<List<EnquiryDetails>> getAllEnquiry() {
 		return ResponseEntity.status(HttpStatus.OK).body(reservice.getAllEnquiry());
 	}

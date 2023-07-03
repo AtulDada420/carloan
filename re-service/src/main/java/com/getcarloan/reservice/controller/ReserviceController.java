@@ -39,9 +39,6 @@ public class ReserviceController {
 	@Autowired
 	private AllPersonalDocsService docservice;
 	
-<<<<<<< HEAD
-
-=======
 	@Autowired
 	private CustomerService customerservice;
 	
@@ -51,7 +48,6 @@ public class ReserviceController {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
->>>>>>> c80d4a07c80eb22c22ed2a816db6efac4c6a7b62
 	@PostMapping("/createEnquiry")
 	public ResponseEntity <String> createEnquiry(@RequestBody EnquiryDetails enquiryDetails){
 		return new ResponseEntity <String> (reservice.createEnquiry(enquiryDetails),HttpStatus.CREATED);

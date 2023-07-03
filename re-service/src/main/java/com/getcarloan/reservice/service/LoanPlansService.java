@@ -6,14 +6,15 @@ import com.getcarloan.reservice.entities.LoanPlans;
 
 public interface LoanPlansService {
 
-	String saveLoanPlans(LoanPlans loanPlans);
+	 String saveLoanPlans(LoanPlans loanPlans);
 
-	LoanPlans getLoanPlansByUserId(int userId);
+	 List<LoanPlans> getAllLoanPlans();
 
-	String updateLoanPlansByUserId(int userId);
+	 LoanPlans getLoanPlansById(int planID);
 
-	String deleteLoanPlansByUserId(int userId);
 
-	List<LoanPlans> getAllLoanPlans();
+	 String updateLoanPlansById(int planID);
+
+	 String deleteLoanPlansById(int planID);
 
 }

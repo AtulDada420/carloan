@@ -21,19 +21,7 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 		return "Guarantor Details saved";
 	}
 
-	@Override
-<<<<<<< HEAD
-	public GuarantorDetails getAllGuarantorDetailsByUserId(int userId) {
-		if (grepo.existsById(userId)) {
-=======
-	public GuarantorDetails getGuarantorDetailsByUserId(int userId) {
-		if (grepo.existsByUserId(userId)) {
->>>>>>> 3d8b7c183aa0c85c3e3db9ce9534c8536e4dbb8b
-			return grepo.findById(userId).get();
-		} else
-			return new GuarantorDetails();
-
-	}
+	
 
 	
 
@@ -55,4 +43,17 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 		return "Update guarantor";
 	}
 
+
+
+
+
+	@Override
+	public GuarantorDetails getGuarantorDetailsByUserId(int userId) {
+		
+		if (grepo.existsByUserId(userId)) {
+
+			return grepo.findById(userId).get();
+		} else
+			return new GuarantorDetails();
+}
 }

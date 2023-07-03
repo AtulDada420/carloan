@@ -277,55 +277,35 @@ public class ReserviceController {
 		return new ResponseEntity<String>(loanservice.deleteLoanDeatailsByUserId(userId), HttpStatus.OK);
 	}
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-<<<<<<< HEAD
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@PostMapping("/saveLoanPlans")
-	public ResponseEntity<String> saveLoanPlans(@RequestBody LoanPlans loanPlans) {
-		return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans), HttpStatus.CREATED);
+	public ResponseEntity<String>saveLoanPlans(@RequestBody LoanPlans loanPlans){
+	 return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans),HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getAllLoanPlansByUserId/{userId}")
-	public ResponseEntity<LoanPlans> getAllLoanPlansByUserId(@PathVariable int userId) {
-		return new ResponseEntity<LoanPlans>(loanPlanservice.getAllLoanPlansByUserId(userId), HttpStatus.OK);
+	@GetMapping("/getLoanPlansById/{planID}")
+	public ResponseEntity<LoanPlans>getLoanPlansById(@PathVariable int planID)
+	{
+	  return new ResponseEntity<LoanPlans>(loanPlanservice.getLoanPlansById(planID),HttpStatus.OK);
 	}
-=======
+
+	@GetMapping("/getAllLoanPlans")
+	public ResponseEntity<List<LoanPlans>> getAllLoanPlans() {
+	 return new ResponseEntity<List<LoanPlans>>(loanPlanservice.getAllLoanPlans(),HttpStatus.OK);
+	 
+	}
+	@PostMapping("/updateLoanPlans/planID")
+	public ResponseEntity<String>updateLoanPlansById(@RequestBody int planID)
+	{
+	 return new ResponseEntity<String>(loanPlanservice.updateLoanPlansById(planID),HttpStatus.OK);
+	}
+
+	@DeleteMapping("/deleteLoanPlans/{planID}")
+	public ResponseEntity<String> deleteLoanPlansById(@PathVariable int planID) {
+	 return new ResponseEntity<String>(loanPlanservice.deleteLoanPlansById(planID), HttpStatus.OK);
 
 
-@PostMapping("/saveLoanPlans")
-public ResponseEntity<String>saveLoanPlans(@RequestBody LoanPlans loanPlans){
-	return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans),HttpStatus.CREATED);
-}
-
-@GetMapping("/getLoanPlansByUserId/{userId}")
-public ResponseEntity<LoanPlans>getLoanPlansByUserId(@PathVariable int userId)
-{
-	 return new ResponseEntity<LoanPlans>(loanPlanservice.getLoanPlansByUserId(userId),HttpStatus.OK);
-}
-
-@GetMapping("/getAllLoanPlans")
-public ResponseEntity<List<LoanPlans>> getAllLoanPlans() {
-	return new ResponseEntity<List<LoanPlans>>(loanPlanservice.getAllLoanPlans(),HttpStatus.OK);
-	
-}
-@PostMapping("/updateLoanPlans/{userId}")
-public ResponseEntity<String>updateLoanPlansByUserId(@RequestBody int userId)
-{
-	return new ResponseEntity<String>(loanPlanservice.updateLoanPlansByUserId(userId),HttpStatus.OK);
-}
-
-@DeleteMapping("/deleteLoanPlans/{userId}")
-public ResponseEntity<String> deleteLoanPlansByUserId(@PathVariable int userId) {
-	return new ResponseEntity<String>(loanPlanservice.deleteLoanPlansByUserId(userId), HttpStatus.OK);
-
-
+	}
 }
 
 
-
-
-
->>>>>>> 3d8b7c183aa0c85c3e3db9ce9534c8536e4dbb8b
-
-}

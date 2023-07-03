@@ -18,27 +18,26 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
 		caddrepo.save(customerAddress);
 		return "Save CustomerAddress";
 	}
-
 	@Override
-	public CustomerAddress CustomerAddressByUserId(int userId) {
-		if (caddrepo.existsById(userId))
-			return caddrepo.findById(userId).get();
+	public CustomerAddress CustomerAddressById(int addId) {
+		if (caddrepo.existsById(addId))
+			return caddrepo.findById(addId).get();
 		else
 			return new CustomerAddress();
 	}
 
 	@Override
-	public String updateCustomerAddressByUserId(int userId) {
-		caddrepo.save(userId);
+	public String updateCustomerAddressById(int addId) {
+		caddrepo.save(addId);
 		return "Update customer Address";
-	}
+		}
+
 
 	@Override
-	public String deleteCustomerAddressByUserId(int userId) {
-		caddrepo.deleteById(userId);
-	return "Delete Customer Address ";
+	public String deleteCustomerAddressById(int addId) {
+		caddrepo.deleteById(addId);
+		return "Delete Customer Address ";
 	}
-
 	
 
 

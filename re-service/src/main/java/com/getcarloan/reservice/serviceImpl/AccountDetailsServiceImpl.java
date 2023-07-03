@@ -20,31 +20,30 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		accrepo.save(accountDetails);
 		return "Save New AccountDetails";
 	}
+	@Override
+	public List<AccountDetails> getAllAccountDetails() {
+		return accrepo.findAll();
+
+	}
 
 	@Override
-	public AccountDetails getAllAccountDetailsByUserId(int userId) {
-		if (accrepo.existsById(userId))
-			return accrepo.findById(userId).get();
+	public AccountDetails getAllAccountDetailsById(int accountId) {
+		if (accrepo.existsById(accountId))
+			return accrepo.findById(accountId).get();
 		else
 			return null;
 	}
 
 	@Override
-	public String updateAccountDetailsByUserId(int userId) {
-		accrepo.save(userId);
-		return "AccountDetails updated";
-	}
-
-	@Override
-	public String deleteAccountDetails(int userId) {
-		accrepo.deleteById(userId);
+	public String deleteAccountDetailsById(int accountId) {
+		accrepo.deleteById(accountId);
 		return "AccountDetails Deleted";
 	}
 
 	@Override
-	public List<AccountDetails> getAllAccountDetails() {
-		return accrepo.findAll();
-
+	public String updateAccountDetailsById(int accountId) {
+		accrepo.save(accountId);
+		return "AccountDetails updated";
 	}
 
 }

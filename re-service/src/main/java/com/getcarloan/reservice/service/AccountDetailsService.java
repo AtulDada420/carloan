@@ -8,13 +8,13 @@ public interface AccountDetailsService {
 
 	String saveAccountDetails(AccountDetails accountDetails);
 
-	String deleteAccountDetails(int userId);
-
 	List<AccountDetails> getAllAccountDetails();
 
-	AccountDetails getAllAccountDetailsByUserId(int userId);
+	AccountDetails getAllAccountDetailsById(int accountId);
 
-	String updateAccountDetailsByUserId(int userId);
+	String deleteAccountDetailsById(int accountId);
+
+	String updateAccountDetailsById(int accountId);
 
 
 

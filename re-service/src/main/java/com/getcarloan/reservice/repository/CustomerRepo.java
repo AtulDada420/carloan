@@ -8,9 +8,9 @@ import com.getcarloan.reservice.entities.Customer;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 
-	boolean existsCustomerByUserId(int userId);
 
-	String save(int userId);
+
+	String save(int cid);
 
 
 }

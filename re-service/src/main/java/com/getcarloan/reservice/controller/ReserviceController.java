@@ -47,23 +47,17 @@ public class ReserviceController {
 	private UserService usrservice;
 	@Autowired
 	private AllPersonalDocsService docservice;
-
 	@Autowired
 	private CustomerService customerservice;
-
 	@Autowired
 	private AccountDetailsService accservice;
-
 	@Autowired
 	private CustomerAddressService caddservice;
-
 	@Autowired
 	private GuarantorDetailsService guarantorservice;
-
 	@Autowired
 	private LoanDetailsService loanservice;
-
-	@Autowired
+    @Autowired
 	private LoanPlansService loanPlanservice;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,9 +135,9 @@ public class ReserviceController {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@GetMapping("/getCustomerByUserId/{userId}")
-	public ResponseEntity<Customer> getCustomerId(@PathVariable int userId) {
-		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerByUserId(userId));
+	@GetMapping("/getCustomerById/{cid}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable int cid) {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getCustomerById(cid));
 	}
 
 	@PostMapping("/saveCustomer")
@@ -157,14 +151,14 @@ public class ReserviceController {
 		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllCustomer());
 	}
 
-	@PostMapping("/updateCustomer/{userId}")
-	public ResponseEntity<String> updateCustomerByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(customerservice.updateCustomerByUserId(userId), HttpStatus.OK);
+	@PutMapping("/updateCustomer/{cid}")
+	public ResponseEntity<String> updateCustomerById(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.updateCustomerById(cid), HttpStatus.OK);
 	}
 
-	@DeleteMapping("deleteCustomer/{userId}")
-	public ResponseEntity<String> deleteCustomer(@PathVariable int userId) {
-		return new ResponseEntity<String>(customerservice.deleteCustomer(userId), HttpStatus.OK);
+	@DeleteMapping("deleteCustomer/{cid}")
+	public ResponseEntity<String> deleteCustomer(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.deleteCustomer(cid), HttpStatus.OK);
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,19 +169,19 @@ public class ReserviceController {
 
 	}
 
-	@GetMapping("/getAllAccountDetailsByUserId/{userId}")
-	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int userId) {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsByUserId(userId));
+	@GetMapping("/getAllAccountDetailsById/{accountId}")
+	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
+		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
 	}
 
-	@PostMapping("/updateAccountDetails/{userId}")
-	public ResponseEntity<String> updateAccountDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(accservice.updateAccountDetailsByUserId(userId), HttpStatus.OK);
+	@PutMapping("/updateAccountDetails/{accountId}")
+	public ResponseEntity<String> updateAccountDetailsByUserId(@PathVariable int accountId) {
+		return new ResponseEntity<String>(accservice.updateAccountDetailsById(accountId), HttpStatus.OK);
 	}
 
-	@DeleteMapping("deleteAccountDetails/{userId}")
-	public ResponseEntity<String> deleteAccountDetails(@PathVariable int userId) {
-		return new ResponseEntity<String>(accservice.deleteAccountDetails(userId), HttpStatus.OK);
+	@DeleteMapping("deleteAccountDetails/{accountId}")
+	public ResponseEntity<String> deleteAccountDetailsById(@PathVariable int accountId) {
+		return new ResponseEntity<String>(accservice.deleteAccountDetailsById(accountId), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllAccountDetails")
@@ -204,19 +198,19 @@ public class ReserviceController {
 
 	}
 
-	@GetMapping("/CustomerAddressByUserId")
-	public ResponseEntity<CustomerAddress> CustomerAddressById(@PathVariable int userId) {
-		return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressByUserId(userId), HttpStatus.OK);
+	@GetMapping("/CustomerAddressById/{addId}")
+	public ResponseEntity<CustomerAddress> CustomerAddressById(@PathVariable int addId) {
+		return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressById(addId), HttpStatus.OK);
 	}
 
-	@PostMapping("/updateCustomerAddress/{userId}")
-	public ResponseEntity<String> updateCustomerAddressByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(caddservice.updateCustomerAddressByUserId(userId), HttpStatus.OK);
+	@PutMapping("/updateCustomerAddress/{addId}")
+	public ResponseEntity<String> updateCustomerAddressById(@PathVariable int addId) {
+		return new ResponseEntity<String>(caddservice.updateCustomerAddressById(addId), HttpStatus.OK);
 	}
 
-	@DeleteMapping("deleteCustomerAddress/{userId}")
-	public ResponseEntity<String> deleteCustomerAddressByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(caddservice.deleteCustomerAddressByUserId(userId), HttpStatus.OK);
+	@DeleteMapping("deleteCustomerAddress/{addId}")
+	public ResponseEntity<String> deleteCustomerAddressById(@PathVariable int addId) {
+		return new ResponseEntity<String>(caddservice.deleteCustomerAddressById(addId), HttpStatus.OK);
 
 	}
 
@@ -227,20 +221,20 @@ public class ReserviceController {
 		return new ResponseEntity<String>(guarantorservice.saveGuarantorDetails(guarantorDetails), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getGuarantorDetailsByUserId/{userId}")
-	public ResponseEntity<GuarantorDetails> getGuarantorDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<GuarantorDetails>(guarantorservice.getGuarantorDetailsByUserId(userId),HttpStatus.OK);
-				
+	@GetMapping("/getGuarantorDetailsByUserId/{gid}")
+	public ResponseEntity<GuarantorDetails> getGuarantorDetailsById(@PathVariable int gid) {
+		return new ResponseEntity<GuarantorDetails>(guarantorservice.getGuarantorDetailsById(gid), HttpStatus.OK);
+
 	}
 
-	@PostMapping("/updateGuarantorDetails")
-	public ResponseEntity<String> updateGuarantorDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(guarantorservice.updateGuarantorDetailsByUserId(userId), HttpStatus.OK);
+	@PutMapping("/updateGuarantorDetails")
+	public ResponseEntity<String> updateGuarantorDetailsById(@PathVariable int gid) {
+		return new ResponseEntity<String>(guarantorservice.updateGuarantorDetailsById(gid), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/deleteGuarantorDetails/{userId}")
-	public ResponseEntity<String> deleteGuarantorDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(guarantorservice.deleteGuarantorDetailsByUserId(userId), HttpStatus.OK);
+	@DeleteMapping("/deleteGuarantorDetailsById/{gid}")
+	public ResponseEntity<String> deleteGuarantorDetailsById(@PathVariable int gid) {
+		return new ResponseEntity<String>(guarantorservice.deleteGuarantorDetailsById(gid), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllguarantorDetails")
@@ -256,9 +250,9 @@ public class ReserviceController {
 		return new ResponseEntity<String>(loanservice.saveLoanDetails(loanDetails), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getLoanDetailsByUserId/{userId}")
-	public ResponseEntity<LoanDetails> getLoanDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<LoanDetails>(loanservice.getLoanDetailsByUserId(userId), HttpStatus.OK);
+	@GetMapping("/getLoanDetailsByUserId/{loanId}")
+	public ResponseEntity<LoanDetails> getLoanDetailsById(@PathVariable int loanId) {
+		return new ResponseEntity<LoanDetails>(loanservice.getLoanDetailsById(loanId), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllLoanDetails")
@@ -266,46 +260,42 @@ public class ReserviceController {
 		return new ResponseEntity<List<LoanDetails>>(loanservice.getAllLoanDetails(), HttpStatus.OK);
 	}
 
-	@PostMapping("/updateLoanDetails/{userId}")
-	public ResponseEntity<String> updateLoanDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(loanservice.updateLoanDetailsByUserId(userId), HttpStatus.OK);
+	@PutMapping("/updateLoanDetails/{loanId}")
+	public ResponseEntity<String> updateLoanDetailsById(@PathVariable int loanId) {
+		return new ResponseEntity<String>(loanservice.updateLoanDetailsById(loanId), HttpStatus.OK);
 
 	}
 
-	@DeleteMapping("/deleteLoanDeatails/{userId}")
-	public ResponseEntity<String> deleteLoanDeatailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<String>(loanservice.deleteLoanDeatailsByUserId(userId), HttpStatus.OK);
+	@DeleteMapping("/deleteLoanDetails/{loanId}")
+	public ResponseEntity<String> deleteLoanDetailsById(@PathVariable int loanId) {
+		return new ResponseEntity<String>(loanservice.deleteLoanDetailsById(loanId), HttpStatus.OK);
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@PostMapping("/saveLoanPlans")
-	public ResponseEntity<String>saveLoanPlans(@RequestBody LoanPlans loanPlans){
-	 return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans),HttpStatus.CREATED);
+	public ResponseEntity<String> saveLoanPlans(@RequestBody LoanPlans loanPlans) {
+		return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getLoanPlansById/{planID}")
-	public ResponseEntity<LoanPlans>getLoanPlansById(@PathVariable int planID)
-	{
-	  return new ResponseEntity<LoanPlans>(loanPlanservice.getLoanPlansById(planID),HttpStatus.OK);
+	public ResponseEntity<LoanPlans> getLoanPlansById(@PathVariable int planID) {
+		return new ResponseEntity<LoanPlans>(loanPlanservice.getLoanPlansById(planID), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllLoanPlans")
 	public ResponseEntity<List<LoanPlans>> getAllLoanPlans() {
-	 return new ResponseEntity<List<LoanPlans>>(loanPlanservice.getAllLoanPlans(),HttpStatus.OK);
-	 
+		return new ResponseEntity<List<LoanPlans>>(loanPlanservice.getAllLoanPlans(), HttpStatus.OK);
+
 	}
-	@PostMapping("/updateLoanPlans/planID")
-	public ResponseEntity<String>updateLoanPlansById(@RequestBody int planID)
-	{
-	 return new ResponseEntity<String>(loanPlanservice.updateLoanPlansById(planID),HttpStatus.OK);
+
+	@PutMapping("/updateLoanPlans/planID")
+	public ResponseEntity<String> updateLoanPlansById(@RequestBody int planID) {
+		return new ResponseEntity<String>(loanPlanservice.updateLoanPlansById(planID), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/deleteLoanPlans/{planID}")
 	public ResponseEntity<String> deleteLoanPlansById(@PathVariable int planID) {
-	 return new ResponseEntity<String>(loanPlanservice.deleteLoanPlansById(planID), HttpStatus.OK);
-
+		return new ResponseEntity<String>(loanPlanservice.deleteLoanPlansById(planID), HttpStatus.OK);
 
 	}
 }
-
-

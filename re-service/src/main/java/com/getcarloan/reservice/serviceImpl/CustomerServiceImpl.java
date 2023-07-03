@@ -16,9 +16,9 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepo crepo;
 
 	@Override
-	public Customer getCustomerByUserId(int userId) {
-		if (crepo.existsById(userId))
-			return crepo.findById(userId).get();
+	public Customer getCustomerById(int cid) {
+		if (crepo.existsById(cid))
+			return crepo.findById(cid).get();
 		else
 			return new Customer();
 	}
@@ -33,16 +33,16 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> getAllCustomer() {
 		return crepo.findAll();
 	}
-     @Override
-	public String updateCustomerByUserId(int userId) {
-		crepo.save(userId);
-		return "Upadate Customer";
 
+	@Override
+	public String deleteCustomer(int cid) {
+		crepo.deleteById(cid);
+		return "Customer Deleted By ID";
 	}
 
 	@Override
-	public String deleteCustomer(int userId) {
-		crepo.deleteById(userId);
-		return "Customer Deleted By ID";
+	public String updateCustomerById(int cid) {
+		crepo.save(cid);
+		return "Upadate Customer";
 	}
 }

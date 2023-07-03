@@ -21,7 +21,7 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
 
 	@Override
 	public CustomerAddress CustomerAddressByUserId(int userId) {
-		if (caddrepo.existsCustomerAddressByUserId(userId))
+		if (caddrepo.existsById(userId))
 			return caddrepo.findById(userId).get();
 		else
 			return new CustomerAddress();

@@ -23,7 +23,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 
 	@Override
 	public AccountDetails getAllAccountDetailsByUserId(int userId) {
-		if (accrepo.existsgetAllAccountDetailsByUserId(userId))
+		if (accrepo.existsById(userId))
 			return accrepo.findById(userId).get();
 		else
 			return null;

@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomerByUserId(int userId) {
-		if (crepo.existsCustomerByUserId(userId))
+		if (crepo.existsById(userId))
 			return crepo.findById(userId).get();
 		else
 			return new Customer();

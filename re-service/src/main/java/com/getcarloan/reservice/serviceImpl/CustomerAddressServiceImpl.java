@@ -28,15 +28,20 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
 	}
 
 	@Override
-	public String updateCustomerAddress(CustomerAddress customerAddress) {
-		caddrepo.save(customerAddress);
-		return "Upadate CustomerAddress";
+	public String updateCustomerAddressByUserId(int userId) {
+		caddrepo.save(userId);
+		return "Update customer Address";
 	}
 
 	@Override
-	public String deleteCustomer(int userId) {
+	public String deleteCustomerAddressByUserId(int userId) {
 		caddrepo.deleteById(userId);
-		return "Customer Deleted By ID";
+	return "Delete Customer Address ";
 	}
+
+	
+
+
+	
 
 }

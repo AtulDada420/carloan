@@ -30,9 +30,9 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	}
 
 	@Override
-	public String updateAccountDetails(AccountDetails accountDetails) {
-		accrepo.save(accountDetails);
-		return "update AccountDetails";
+	public String updateAccountDetailsByUserId(int userId) {
+		accrepo.save(userId);
+		return "AccountDetails updated";
 	}
 
 	@Override

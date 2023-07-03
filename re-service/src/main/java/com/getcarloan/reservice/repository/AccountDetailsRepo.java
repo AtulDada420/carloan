@@ -8,4 +8,11 @@ import com.getcarloan.reservice.entities.AccountDetails;
 @Repository
 public interface AccountDetailsRepo extends JpaRepository<AccountDetails, Integer> {
 
+<<<<<<< HEAD
+=======
+	boolean existsgetAllAccountDetailsByUserId(int userId);
+
+	String save(int userId);
+
+>>>>>>> 3d8b7c183aa0c85c3e3db9ce9534c8536e4dbb8b
 }

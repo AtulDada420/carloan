@@ -157,9 +157,9 @@ public class ReserviceController {
 		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllCustomer());
 	}
 
-	@PutMapping("/updateCustomer")
-	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
-		return new ResponseEntity<String>(customerservice.updateCustomer(customer), HttpStatus.OK);
+	@PostMapping("/updateCustomer/{userId}")
+	public ResponseEntity<String> updateCustomerByUserId(@PathVariable int userId) {
+		return new ResponseEntity<String>(customerservice.updateCustomerByUserId(userId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("deleteCustomer/{userId}")
@@ -180,9 +180,9 @@ public class ReserviceController {
 		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsByUserId(userId));
 	}
 
-	@PutMapping("/updateAccountDetails")
-	public ResponseEntity<String> updateAccountDetails(@RequestBody AccountDetails accountDetails) {
-		return new ResponseEntity<String>(accservice.updateAccountDetails(accountDetails), HttpStatus.OK);
+	@PostMapping("/updateAccountDetails/{userId}")
+	public ResponseEntity<String> updateAccountDetailsByUserId(@PathVariable int userId) {
+		return new ResponseEntity<String>(accservice.updateAccountDetailsByUserId(userId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("deleteAccountDetails/{userId}")
@@ -209,14 +209,14 @@ public class ReserviceController {
 		return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressByUserId(userId), HttpStatus.OK);
 	}
 
-	@PostMapping("/updateCustomerAddress")
-	public ResponseEntity<String> updateCustomerAddress(@RequestBody CustomerAddress customerAddress) {
-		return new ResponseEntity<String>(caddservice.updateCustomerAddress(customerAddress), HttpStatus.OK);
+	@PostMapping("/updateCustomerAddress/{userId}")
+	public ResponseEntity<String> updateCustomerAddressByUserId(@PathVariable int userId) {
+		return new ResponseEntity<String>(caddservice.updateCustomerAddressByUserId(userId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("deleteCustomerAddress/{userId}")
-	public ResponseEntity<String> deleteCustomerAddress(@PathVariable int userId) {
-		return new ResponseEntity<String>(caddservice.deleteCustomer(userId), HttpStatus.OK);
+	public ResponseEntity<String> deleteCustomerAddressByUserId(@PathVariable int userId) {
+		return new ResponseEntity<String>(caddservice.deleteCustomerAddressByUserId(userId), HttpStatus.OK);
 
 	}
 
@@ -227,15 +227,15 @@ public class ReserviceController {
 		return new ResponseEntity<String>(guarantorservice.saveGuarantorDetails(guarantorDetails), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getAllGuarantorDetailsByUserId/{userId}")
-	public ResponseEntity<GuarantorDetails> getAllGuarantorDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<GuarantorDetails>(guarantorservice.getAllGuarantorDetailsByUserId(userId),
-				HttpStatus.OK);
+	@GetMapping("/getGuarantorDetailsByUserId/{userId}")
+	public ResponseEntity<GuarantorDetails> getGuarantorDetailsByUserId(@PathVariable int userId) {
+		return new ResponseEntity<GuarantorDetails>(guarantorservice.getGuarantorDetailsByUserId(userId),HttpStatus.OK);
+				
 	}
 
 	@PostMapping("/updateGuarantorDetails")
-	public ResponseEntity<String> updateGuarantorDetails(@RequestBody GuarantorDetails guarantorDetails) {
-		return new ResponseEntity<String>(guarantorservice.updateGuarantorDetails(guarantorDetails), HttpStatus.OK);
+	public ResponseEntity<String> updateGuarantorDetailsByUserId(@PathVariable int userId) {
+		return new ResponseEntity<String>(guarantorservice.updateGuarantorDetailsByUserId(userId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/deleteGuarantorDetails/{userId}")
@@ -256,9 +256,9 @@ public class ReserviceController {
 		return new ResponseEntity<String>(loanservice.saveLoanDetails(loanDetails), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getAllLoanDetailsByUserId/{userId}")
-	public ResponseEntity<LoanDetails> getAllLoanDetailsByUserId(@PathVariable int userId) {
-		return new ResponseEntity<LoanDetails>(loanservice.getAllLoanDetailsByUserId(userId), HttpStatus.OK);
+	@GetMapping("/getLoanDetailsByUserId/{userId}")
+	public ResponseEntity<LoanDetails> getLoanDetailsByUserId(@PathVariable int userId) {
+		return new ResponseEntity<LoanDetails>(loanservice.getLoanDetailsByUserId(userId), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllLoanDetails")
@@ -266,9 +266,9 @@ public class ReserviceController {
 		return new ResponseEntity<List<LoanDetails>>(loanservice.getAllLoanDetails(), HttpStatus.OK);
 	}
 
-	@PostMapping("/updateLoanDetails")
-	public ResponseEntity<String> updateLoanDetails(@RequestBody LoanDetails loanDetails) {
-		return new ResponseEntity<String>(loanservice.updateLoanDetails(loanDetails), HttpStatus.OK);
+	@PostMapping("/updateLoanDetails/{userId}")
+	public ResponseEntity<String> updateLoanDetailsByUserId(@PathVariable int userId) {
+		return new ResponseEntity<String>(loanservice.updateLoanDetailsByUserId(userId), HttpStatus.OK);
 
 	}
 
@@ -277,8 +277,10 @@ public class ReserviceController {
 		return new ResponseEntity<String>(loanservice.deleteLoanDeatailsByUserId(userId), HttpStatus.OK);
 	}
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 	@PostMapping("/saveLoanPlans")
 	public ResponseEntity<String> saveLoanPlans(@RequestBody LoanPlans loanPlans) {
 		return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans), HttpStatus.CREATED);
@@ -288,5 +290,42 @@ public class ReserviceController {
 	public ResponseEntity<LoanPlans> getAllLoanPlansByUserId(@PathVariable int userId) {
 		return new ResponseEntity<LoanPlans>(loanPlanservice.getAllLoanPlansByUserId(userId), HttpStatus.OK);
 	}
+=======
+
+
+@PostMapping("/saveLoanPlans")
+public ResponseEntity<String>saveLoanPlans(@RequestBody LoanPlans loanPlans){
+	return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans),HttpStatus.CREATED);
+}
+
+@GetMapping("/getLoanPlansByUserId/{userId}")
+public ResponseEntity<LoanPlans>getLoanPlansByUserId(@PathVariable int userId)
+{
+	 return new ResponseEntity<LoanPlans>(loanPlanservice.getLoanPlansByUserId(userId),HttpStatus.OK);
+}
+
+@GetMapping("/getAllLoanPlans")
+public ResponseEntity<List<LoanPlans>> getAllLoanPlans() {
+	return new ResponseEntity<List<LoanPlans>>(loanPlanservice.getAllLoanPlans(),HttpStatus.OK);
+	
+}
+@PostMapping("/updateLoanPlans/{userId}")
+public ResponseEntity<String>updateLoanPlansByUserId(@RequestBody int userId)
+{
+	return new ResponseEntity<String>(loanPlanservice.updateLoanPlansByUserId(userId),HttpStatus.OK);
+}
+
+@DeleteMapping("/deleteLoanPlans/{userId}")
+public ResponseEntity<String> deleteLoanPlansByUserId(@PathVariable int userId) {
+	return new ResponseEntity<String>(loanPlanservice.deleteLoanPlansByUserId(userId), HttpStatus.OK);
+
+
+}
+
+
+
+
+
+>>>>>>> 3d8b7c183aa0c85c3e3db9ce9534c8536e4dbb8b
 
 }

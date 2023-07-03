@@ -6,14 +6,16 @@ import com.getcarloan.reservice.entities.AccountDetails;
 
 public interface AccountDetailsService {
 
-	String saveAccountDetails(AccountDetails accountdetails);
+	String saveAccountDetails(AccountDetails accountDetails);
 
-	AccountDetails getAllAccountDetailsById(int accountId);
-
-	String updateAccountDetails(AccountDetails accountDetails);
-
-	String deleteAccountDetails(int accountId);
+	String deleteAccountDetails(int userId);
 
 	List<AccountDetails> getAllAccountDetails();
+
+	AccountDetails getAllAccountDetailsByUserId(int userId);
+
+	String updateAccountDetailsByUserId(int userId);
+
+
 
 }

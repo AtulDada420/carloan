@@ -16,6 +16,8 @@ import com.getcarloan.reservice.service.UserService;
 public class UserServiceIMPL implements UserService {
 	@Autowired
 	private UserRepo usrepo;
+
+	
 	@Autowired
 	private JavaMailSender sender;
 	
@@ -34,7 +36,7 @@ public class UserServiceIMPL implements UserService {
 
 	@Override
 	public User getUserByUserId(int userId) {
-		if(usrepo.existsByUserId(userId)) 
+		if(usrepo.existsById(userId)) 
 			return usrepo.findById(userId).get();
 		else 
 			return null;

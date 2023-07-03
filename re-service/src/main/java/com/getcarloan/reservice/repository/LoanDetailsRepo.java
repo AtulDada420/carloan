@@ -3,14 +3,13 @@ package com.getcarloan.reservice.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.getcarloan.reservice.entities.AccountDetails;
+import com.getcarloan.reservice.entities.LoanDetails;
 
 @Repository
-public interface AccountDetailsRepo extends JpaRepository<AccountDetails, Integer> {
+public interface LoanDetailsRepo extends JpaRepository<LoanDetails, Integer> {
 
 
-
-	boolean existsgetAllAccountDetailsByUserId(int userId);
+	boolean existsByUserId(int userId);
 
 	String save(int userId);
 

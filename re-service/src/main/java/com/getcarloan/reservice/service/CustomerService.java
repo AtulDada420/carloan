@@ -7,16 +7,16 @@ import com.getcarloan.reservice.entities.Customer;
 
 public interface CustomerService {
 
-	Customer getCustomerByUserId(int userId);
+	Customer getCustomerById(int cid);
 
 	String saveCustomer(Customer customer);
 
 	List<Customer> getAllCustomer();
 
 
-	String deleteCustomer(int userId);
+	String deleteCustomer(int cid);
 
-	String updateCustomerByUserId(int userId);
+	String updateCustomerById(int cid);
 
 	
 

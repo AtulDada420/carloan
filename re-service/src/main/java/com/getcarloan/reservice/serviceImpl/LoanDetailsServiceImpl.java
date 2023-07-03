@@ -29,24 +29,25 @@ public class LoanDetailsServiceImpl implements LoanDetailsService{
 	}
 
 	@Override
-	public String deleteLoanDeatailsByUserId(int userId) {
-		loanrepo.deleteById(userId);
-		return "Delete Loan Details";
-	}
+	public LoanDetails getLoanDetailsById(int loanId) {
+			if(loanrepo.existsById(loanId)) {
+				return loanrepo.findById(loanId).get();
+				}
+				else
+					return new LoanDetails();
+		}
 
 	@Override
-	public LoanDetails getLoanDetailsByUserId(int userId) {
-		if(loanrepo.existsByUserId(userId)) {
-			return loanrepo.findById(userId).get();
-			}
-			else
-				return new LoanDetails();
-	}
-
-	@Override
-	public String updateLoanDetailsByUserId(int userId) {
-		loanrepo.save(userId);
+	public String updateLoanDetailsById(int loanId) {
+		loanrepo.save(loanId);
 		return "Update loan Details";
 	}
+
+	@Override
+	public String deleteLoanDetailsById(int loanId) {
+		loanrepo.deleteById(loanId);
+		return "Delete Loan Details";
+	}
+	
 }
 	

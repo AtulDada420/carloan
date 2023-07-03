@@ -26,8 +26,8 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 	
 
 	@Override
-	public String deleteGuarantorDetailsByUserId(int userId) {
-		grepo.deleteById(userId);
+	public String deleteGuarantorDetailsById(int gid) {
+		grepo.deleteById(gid);
 		return "Delete Guarantor Details";
 	}
 
@@ -38,22 +38,18 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService {
 	}
 
 	@Override
-	public String updateGuarantorDetailsByUserId(int userId) {
-		grepo.save(userId);
-		return "Update guarantor";
+	public GuarantorDetails getGuarantorDetailsById(int gid) {
+		if (grepo.existsById(gid)) {
+
+			return grepo.findById(gid).get();
+		} else
+			return new GuarantorDetails();
 	}
 
 
-
-
-
 	@Override
-	public GuarantorDetails getGuarantorDetailsByUserId(int userId) {
-		
-		if (grepo.existsByUserId(userId)) {
-
-			return grepo.findById(userId).get();
-		} else
-			return new GuarantorDetails();
-}
+	public String updateGuarantorDetailsById(int gid) {
+		grepo.save(gid);
+		return "Update guarantor";
+	}
 }

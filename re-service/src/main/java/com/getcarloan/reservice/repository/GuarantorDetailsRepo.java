@@ -8,9 +8,6 @@ import com.getcarloan.reservice.entities.GuarantorDetails;
 @Repository
 public interface GuarantorDetailsRepo extends JpaRepository<GuarantorDetails, Integer>{
 
-
-	String save(int userId);
-
-	boolean existsByUserId(int userId);
+	String save(int gid);
 
 }

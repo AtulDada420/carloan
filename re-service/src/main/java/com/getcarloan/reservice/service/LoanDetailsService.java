@@ -10,12 +10,11 @@ public interface LoanDetailsService {
 	String saveLoanDetails(LoanDetails loanDetails);
 
 	List<LoanDetails> getAllLoanDetails();
+	LoanDetails getLoanDetailsById(int loanId);
 
-	String deleteLoanDeatailsByUserId(int userId);
+	String updateLoanDetailsById(int loanId);
 
-	LoanDetails getLoanDetailsByUserId(int userId);
-
-	String updateLoanDetailsByUserId(int userId);
+	String deleteLoanDetailsById(int loanId);
 
 	
 

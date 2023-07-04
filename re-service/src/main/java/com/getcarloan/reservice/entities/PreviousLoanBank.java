@@ -18,7 +18,7 @@ public class PreviousLoanBank {
 @Id
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "previousloanbank_generator")
 @SequenceGenerator(name = "previousloanbank_generator", sequenceName = "PREVIOUSLOANSBANK_SEQUENCE",initialValue=101010,allocationSize = 0)
-
+private int bId;
 private int	branchCode;
 private	 String branchName;
 private String BranchType;

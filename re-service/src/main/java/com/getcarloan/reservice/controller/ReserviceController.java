@@ -343,9 +343,9 @@ public class ReserviceController {
 				
 	}
 
-	@GetMapping("/getPreviousLoanBank/{branchCode}")
-	public ResponseEntity<PreviousLoanBank> getPreviousLoanBankById(@PathVariable int branchCode) {
-		return new ResponseEntity<PreviousLoanBank>(preloanBankservice.getPreviousLoanBankById(branchCode),
+	@GetMapping("/getPreviousLoanBank/{bId}")
+	public ResponseEntity<PreviousLoanBank> getPreviousLoanBankById(@PathVariable int bId) {
+		return new ResponseEntity<PreviousLoanBank>(preloanBankservice.getPreviousLoanBankById(bId),
 				HttpStatus.OK);
 	}
 
@@ -354,14 +354,14 @@ public class ReserviceController {
 		return new ResponseEntity<List<PreviousLoanBank>>(preloanBankservice.getAllPreviousLoanBank(), HttpStatus.OK);
 	}
 
-	@PutMapping("/updatePreviousLoanBank/{branchCode}")
-	public ResponseEntity<String> updatePreviousLoanBankById(@RequestBody int branchCode) {
-		return new ResponseEntity<String>(preloanBankservice.updatePreviousLoanbankById(branchCode), HttpStatus.OK);
+	@PutMapping("/updatePreviousLoanBank/{bId}")
+	public ResponseEntity<String> updatePreviousLoanBankById(@RequestBody int bId) {
+		return new ResponseEntity<String>(preloanBankservice.updatePreviousLoanbankById(bId), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/deletePreviousLoanBank/{branchCode}")
-	public ResponseEntity<String> deletePreviousLoansBankById(@PathVariable int branchCode) {
-		return new ResponseEntity<String>(preloanBankservice.deletePreviousLoanBankById(branchCode), HttpStatus.OK);
+	@DeleteMapping("/deletePreviousLoanBank/{bId}")
+	public ResponseEntity<String> deletePreviousLoansBankById(@PathVariable int bId) {
+		return new ResponseEntity<String>(preloanBankservice.deletePreviousLoanBankById(bId), HttpStatus.OK);
 
 	}
 

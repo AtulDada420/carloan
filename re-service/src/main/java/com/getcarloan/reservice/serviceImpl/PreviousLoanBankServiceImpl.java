@@ -23,9 +23,9 @@ public class PreviousLoanBankServiceImpl implements PreviousLoanBankService {
 	}
 
 	@Override
-	public PreviousLoanBank getPreviousLoanBankById(int branchCode) {
-		if (preloanbankrepo.existsById(branchCode)) {
-			return preloanbankrepo.findById(branchCode).get();
+	public PreviousLoanBank getPreviousLoanBankById(int bId) {
+		if (preloanbankrepo.existsById(bId)) {
+			return preloanbankrepo.findById(bId).get();
 		} else
 			return null;
 
@@ -37,15 +37,15 @@ public class PreviousLoanBankServiceImpl implements PreviousLoanBankService {
 	}
 
 	@Override
-	public String updatePreviousLoanbankById(int branchCode) {
-		preloanbankrepo.save(branchCode);
+	public String updatePreviousLoanbankById(int bId) {
+		preloanbankrepo.save(bId);
 		return "Update Previous Loan Bank";
 
 	}
 
 	@Override
-	public String deletePreviousLoanBankById(int branchCode) {
-		preloanbankrepo.deleteById(branchCode);
+	public String deletePreviousLoanBankById(int bId) {
+		preloanbankrepo.deleteById(bId);
 		return "Delete Previous Loan Bank";
 	}
 

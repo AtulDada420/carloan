@@ -8,13 +8,13 @@ public interface PreviousLoanBankService {
 
 	String savePreviousLoanBank(PreviousLoanBank previousLoanBank);
 
-	PreviousLoanBank getPreviousLoanBankById(int branchCode);
+	PreviousLoanBank getPreviousLoanBankById(int bId);
 
 	List<PreviousLoanBank> getAllPreviousLoanBank();
 
-	String updatePreviousLoanbankById(int branchCode);
+	String updatePreviousLoanbankById(int bId);
 
-	String deletePreviousLoanBankById(int branchCode);
+	String deletePreviousLoanBankById(int bId);
 
 	
 

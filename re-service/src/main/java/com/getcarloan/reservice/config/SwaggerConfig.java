@@ -18,7 +18,9 @@ public class SwaggerConfig {
 			return new Docket(DocumentationType.SWAGGER_2)
 					.select()
 					.apis(RequestHandlerSelectors
-					.basePackage("com.App.Configuration"))
+
+					.basePackage("com.getcarLoan"))
+
 					.paths(PathSelectors.any())
 					.build();
 		}	

@@ -26,6 +26,8 @@ import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.GuarantorDetails;
 import com.getcarloan.reservice.entities.LoanDetails;
 import com.getcarloan.reservice.entities.LoanPlans;
+import com.getcarloan.reservice.entities.PreviousLoan;
+import com.getcarloan.reservice.entities.PreviousLoanBank;
 import com.getcarloan.reservice.entities.User;
 import com.getcarloan.reservice.service.AccountDetailsService;
 import com.getcarloan.reservice.service.AllPersonalDocsService;
@@ -34,6 +36,8 @@ import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.GuarantorDetailsService;
 import com.getcarloan.reservice.service.LoanDetailsService;
 import com.getcarloan.reservice.service.LoanPlansService;
+import com.getcarloan.reservice.service.PreviousLoanBankService;
+import com.getcarloan.reservice.service.PreviousLoanService;
 import com.getcarloan.reservice.service.ReserviceService;
 import com.getcarloan.reservice.service.UserService;
 
@@ -57,8 +61,14 @@ public class ReserviceController {
 	private GuarantorDetailsService guarantorservice;
 	@Autowired
 	private LoanDetailsService loanservice;
-    @Autowired
+	@Autowired
 	private LoanPlansService loanPlanservice;
+
+	@Autowired
+	private PreviousLoanService preloanservice;
+
+	@Autowired
+	private PreviousLoanBankService preloanBankservice;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -221,7 +231,7 @@ public class ReserviceController {
 		return new ResponseEntity<String>(guarantorservice.saveGuarantorDetails(guarantorDetails), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getGuarantorDetailsByUserId/{gid}")
+	@GetMapping("/getGuarantorDetailsById/{gid}")
 	public ResponseEntity<GuarantorDetails> getGuarantorDetailsById(@PathVariable int gid) {
 		return new ResponseEntity<GuarantorDetails>(guarantorservice.getGuarantorDetailsById(gid), HttpStatus.OK);
 
@@ -250,7 +260,7 @@ public class ReserviceController {
 		return new ResponseEntity<String>(loanservice.saveLoanDetails(loanDetails), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getLoanDetailsByUserId/{loanId}")
+	@GetMapping("/getLoanDetailsById/{loanId}")
 	public ResponseEntity<LoanDetails> getLoanDetailsById(@PathVariable int loanId) {
 		return new ResponseEntity<LoanDetails>(loanservice.getLoanDetailsById(loanId), HttpStatus.OK);
 	}
@@ -288,7 +298,7 @@ public class ReserviceController {
 
 	}
 
-	@PutMapping("/updateLoanPlans/planID")
+	@PutMapping("/updateLoanPlans/{planID}")
 	public ResponseEntity<String> updateLoanPlansById(@RequestBody int planID) {
 		return new ResponseEntity<String>(loanPlanservice.updateLoanPlansById(planID), HttpStatus.OK);
 	}
@@ -298,4 +308,62 @@ public class ReserviceController {
 		return new ResponseEntity<String>(loanPlanservice.deleteLoanPlansById(planID), HttpStatus.OK);
 
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@PostMapping("/savePreviousLoan")
+	public ResponseEntity<String> savePreviousLoan(@RequestBody PreviousLoan previousLoan) {
+		return new ResponseEntity<String>(preloanservice.savePreviousLoan(previousLoan), HttpStatus.CREATED);
+	}
+
+	@GetMapping("/getPreviousLoan/{pLoanId}")
+	public ResponseEntity<PreviousLoan> getPreviousLoanById(@PathVariable int pLoanId) {
+		return new ResponseEntity<PreviousLoan>(preloanservice.getPreviousLoanById(pLoanId), HttpStatus.OK);
+	}
+
+	@GetMapping("/getAllPreviousLoan")
+	public ResponseEntity<List<PreviousLoan>> getAllPreviousLoan() {
+		return new ResponseEntity<List<PreviousLoan>>(preloanservice.getAllPreviousLoan(), HttpStatus.OK);
+	}
+
+	@PutMapping("/updatePreviousLoan/{pLoanId}")
+	public ResponseEntity<String> updatePreviousLoanById(@RequestBody int pLoanId) {
+		return new ResponseEntity<String>(preloanservice.updatePreviousLoanById(pLoanId), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/deletePreviousLoan/{pLoanId}")
+	public ResponseEntity<String> deletePreviousLoansById(@PathVariable int pLoanId) {
+		return new ResponseEntity<String>(preloanservice.deletePreviousLoanById(pLoanId), HttpStatus.OK);
+
+	}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+	@PostMapping("/savePreviousLoanBank")
+	public ResponseEntity<String> savePreviousLoanBank(@RequestBody PreviousLoanBank previousLoanBank) {
+		return new ResponseEntity<String>(preloanBankservice.savePreviousLoanBank(previousLoanBank),HttpStatus.CREATED);
+				
+	}
+
+	@GetMapping("/getPreviousLoanBank/{bId}")
+	public ResponseEntity<PreviousLoanBank> getPreviousLoanBankById(@PathVariable int bId) {
+		return new ResponseEntity<PreviousLoanBank>(preloanBankservice.getPreviousLoanBankById(bId),
+				HttpStatus.OK);
+	}
+
+	@GetMapping("/getAllPreviousLoanBank")
+	public ResponseEntity<List<PreviousLoanBank>> getAllPreviousLoanBank() {
+		return new ResponseEntity<List<PreviousLoanBank>>(preloanBankservice.getAllPreviousLoanBank(), HttpStatus.OK);
+	}
+
+	@PutMapping("/updatePreviousLoanBank/{bId}")
+	public ResponseEntity<String> updatePreviousLoanBankById(@RequestBody int bId) {
+		return new ResponseEntity<String>(preloanBankservice.updatePreviousLoanbankById(bId), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/deletePreviousLoanBank/{bId}")
+	public ResponseEntity<String> deletePreviousLoansBankById(@PathVariable int bId) {
+		return new ResponseEntity<String>(preloanBankservice.deletePreviousLoanBankById(bId), HttpStatus.OK);
+
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 }

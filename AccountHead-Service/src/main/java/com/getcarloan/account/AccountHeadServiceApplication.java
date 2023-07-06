@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.getcarloan.account;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +8,8 @@ public class AccountHeadServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AccountHeadServiceApplication.class, args);
+		
+		System.out.println("Account Head Service Running");
 	}
 
 }

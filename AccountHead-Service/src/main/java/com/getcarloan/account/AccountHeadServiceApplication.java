@@ -9,7 +9,7 @@ public class AccountHeadServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AccountHeadServiceApplication.class, args);
 		
-		System.out.println("Account Head Service Running");
+		System.out.println("AccountHead-Service Running...!!!");
 	}
 
 }

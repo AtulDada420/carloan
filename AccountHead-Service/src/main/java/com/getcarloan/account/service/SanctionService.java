@@ -1,14 +1,15 @@
 package com.getcarloan.account.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.getcarloan.accountheader.entity.SanctionLetter;
-
+import com.getcarloan.account.entity.SanctionLetter;
 
 public interface SanctionService {
 
 	String saveSanctionLetter(SanctionLetter sanctionLetter);
 
-	
+	List<SanctionLetter> viewSanctionLetter();
+
+	SanctionLetter viewSanctionLetterByID(int cid);
 
 }

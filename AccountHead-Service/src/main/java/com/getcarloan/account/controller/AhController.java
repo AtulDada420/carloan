@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.getcarloan.account.entity.Customer;
 import com.getcarloan.account.entity.LoanDisbursement;
 import com.getcarloan.account.entity.SanctionLetter;
 import com.getcarloan.account.service.LoanDisbursementService;
 import com.getcarloan.account.service.SanctionService;
+
 
 
 
@@ -71,6 +73,13 @@ public class AhController {
 	@GetMapping("/getLoanDisbursementByAgrId/{agreementId}")
 	public ResponseEntity<LoanDisbursement> getLoanDisbursementByAgrId(@PathVariable int agreementId ){
 		return new ResponseEntity<LoanDisbursement>(ldService.getLoanDisbursementByAgrId(agreementId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getCustomerById/{cid}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable int cid) {
+		return new ResponseEntity<Customer>(service.getCustomerById(cid),HttpStatus.OK);
+		
+	
 	}
 	
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.getcarloan.account.entity.Customer;
 import com.getcarloan.account.entity.SanctionLetter;
+import com.getcarloan.account.proxy.Feigncommunication;
 import com.getcarloan.account.repository.SanctionRepository;
 
 @Service
@@ -13,6 +15,9 @@ public class SanctionServiceImpl implements SanctionService{
 
 	@Autowired
 	private SanctionRepository repo;
+	
+	@Autowired
+	private Feigncommunication communication;
 	
 	@Override
 	public String saveSanctionLetter(SanctionLetter sanctionLetter) {
@@ -34,6 +39,16 @@ public class SanctionServiceImpl implements SanctionService{
 		return repo.findById(cid).get();
 		else
 			return null;
+	}
+
+	@Override
+	public Customer getCustomerById(int cid) {
+		Customer cust=communication.getCustomerById(cid);
+		
+		
+		return cust;
+			
+			
 	}
 
 }

@@ -30,7 +30,7 @@ public interface CustomerService {
 
 	Customer saveCustomerDocs(Customer customer);
 
-	void saveDocument(AllPersonalDocs doc);
+	//void saveDocument(AllPersonalDocs doc);
 
 	Customer saveCustomeWithAccountDetails(Customer customer);
 

@@ -42,13 +42,19 @@ public class SanctionServiceImpl implements SanctionService{
 	}
 
 	@Override
-	public Customer getCustomerById(int cid) {
+	public Customer getCustomerId(int cid) {
 		Customer cust=communication.getCustomerById(cid);
 		
 		
 		return cust;
 			
 			
+	}
+
+	@Override
+	public List<Customer> getAllCustomerByFeign() {
+	List<Customer> allCustomer=communication.getAllCustomerByFeign();
+		return allCustomer;
 	}
 
 }

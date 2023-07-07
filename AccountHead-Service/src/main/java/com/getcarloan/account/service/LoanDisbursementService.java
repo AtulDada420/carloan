@@ -2,6 +2,7 @@ package com.getcarloan.account.service;
 
 import java.util.List;
 
+import com.getcarloan.account.entity.Customer;
 import com.getcarloan.account.entity.LoanDisbursement;
 import com.getcarloan.account.entity.SanctionLetter;
 
@@ -14,6 +15,10 @@ public interface LoanDisbursementService {
 	LoanDisbursement getLoanDisbursementByCustId(int cid);
 
 	LoanDisbursement getLoanDisbursementByAgrId(int agreementId);
+
+	Customer getCustomerId(int cid);
+
+	List<Customer> getAllCustomerByFeign();
 
 	
 

@@ -13,6 +13,8 @@ public interface SanctionService {
 
 	SanctionLetter viewSanctionLetterByID(int cid);
 
-	Customer getCustomerById(int cid);
+	Customer getCustomerId(int cid);
+
+	List<Customer> getAllCustomerByFeign();
 
 }

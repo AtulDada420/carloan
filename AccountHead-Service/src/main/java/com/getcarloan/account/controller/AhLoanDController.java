@@ -16,42 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.getcarloan.account.entity.Customer;
 import com.getcarloan.account.entity.LoanDisbursement;
-import com.getcarloan.account.entity.SanctionLetter;
+
 import com.getcarloan.account.service.LoanDisbursementService;
-import com.getcarloan.account.service.SanctionService;
+
 
 
 
 
 
 @RestController
-@RequestMapping("/ah-api")
-public class AhController {
+@RequestMapping("/ah-api/LoanDisbursement")
+public class AhLoanDController {
 	
-	@Autowired
-	private SanctionService service ;
+	
 	
 	@Autowired
 	private LoanDisbursementService ldService;
 	
-	
-	
-	@PostMapping("/saveSanctionLetter")
-	public ResponseEntity<String> saveSanctionLetter(@RequestBody SanctionLetter sanctionLetter) {
-		System.out.println(sanctionLetter);
-		return new ResponseEntity<String>(service.saveSanctionLetter(sanctionLetter),HttpStatus.CREATED);
-		
-	}
-
-	@GetMapping("/viewSanctionLetter")
-	public ResponseEntity<List<SanctionLetter>> viewSanctionLetter(){
-		return new ResponseEntity<List<SanctionLetter>>(service.viewSanctionLetter(),HttpStatus.OK);
-		
-	}
-	@GetMapping("/viewSanctionLetterById/{cid}")
-	public ResponseEntity<SanctionLetter> viewSanctionLetterById(@PathVariable int cid ){
-		return new ResponseEntity<SanctionLetter>(service.viewSanctionLetterByID(cid),HttpStatus.OK);
-	}
 	
 	@PostMapping("/generateLoanDisbursementFile")
 	public ResponseEntity<String> generateLoanDisbursementFile(@RequestBody LoanDisbursement loanDisbursement) {
@@ -75,11 +56,18 @@ public class AhController {
 		return new ResponseEntity<LoanDisbursement>(ldService.getLoanDisbursementByAgrId(agreementId),HttpStatus.OK);
 	}
 	
-	@GetMapping("/getCustomerById/{cid}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable int cid) {
-		return new ResponseEntity<Customer>(service.getCustomerById(cid),HttpStatus.OK);
+	@GetMapping("/getCustomerId/{cid}")
+	public ResponseEntity<Customer> getCustomerId(@PathVariable int cid) {
+		return new ResponseEntity<Customer>(ldService.getCustomerId(cid),HttpStatus.OK);
 		
 	
 	}
+	@GetMapping("/getAllCustomerByFeign")
+	public ResponseEntity<List<Customer>> getAllCustomerByFeign() {
+		return new ResponseEntity<List<Customer>>(ldService.getAllCustomerByFeign(),HttpStatus.OK);
+		
+	
+	}
+	
 	
 }

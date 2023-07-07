@@ -7,8 +7,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.getcarloan.account.entity.Customer;
 import com.getcarloan.account.entity.LoanDisbursement;
 import com.getcarloan.account.entity.SanctionLetter;
+import com.getcarloan.account.proxy.Feigncommunication;
 import com.getcarloan.account.repository.LoanDisbursementRepository;
 
 @Service
@@ -20,7 +22,8 @@ public class LoanDisbursementServiceImpl implements LoanDisbursementService {
 	@Autowired
 	private JavaMailSender sender;
 	
-	
+	@Autowired
+	private Feigncommunication communication;
 
 	@Override
 	public String generateLoanDisbursementFile(LoanDisbursement loanDisbursement) {
@@ -61,6 +64,20 @@ if (ldRepo.existsById(agreementId))
 			return ldRepo.findById(agreementId).get();
 			else
 				return null;
+	}
+
+	@Override
+	public Customer getCustomerId(int cid) {
+Customer cust=communication.getCustomerById(cid);
+		
+		
+		return cust;
+	}
+
+	@Override
+	public List<Customer> getAllCustomerByFeign() {
+		List<Customer> allCustomer=communication.getAllCustomerByFeign();
+		return allCustomer;
 	}
 	
 

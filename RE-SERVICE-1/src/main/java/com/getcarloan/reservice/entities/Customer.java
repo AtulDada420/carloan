@@ -23,6 +23,7 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cust_generator")
 	@SequenceGenerator(name = "cust_generator", sequenceName = "CUSTOMER_SEQUENCE",initialValue=1000,allocationSize = 0)
 	private int cid;
+	private int enquireId;
 	private String name;
 	private String DOB;
 	private int age;
@@ -33,22 +34,28 @@ public class Customer {
 	private double downPaymentAmount;
 	private double totalLoanRequired;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private User userId;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private AllPersonalDocs cAllPersonalDocs;
+	@OneToOne(cascade = CascadeType.ALL)
+	private AllPersonalDocs cAllPersonalDocs;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerAddress cAddress;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private AccountDetails cAccountDetails;
-
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private LoanDetails cLoanDetails;
+	
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private GuarantorDetails cGuarantorDetails;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private PreviousLoan cPreviousLoan;
+	
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private PreviousLoanBank pbankDetails;
 
 }

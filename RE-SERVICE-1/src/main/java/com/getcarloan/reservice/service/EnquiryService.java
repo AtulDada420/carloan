@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.getcarloan.reservice.entities.EnquiryDetails;
 
-public interface ReserviceService {
+public interface EnquiryService {
 
 	EnquiryDetails getEnquiryByUserId(int userId);
 

@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 import com.getcarloan.reservice.entities.Customer;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.User;
-import com.getcarloan.reservice.repository.ReserviceRepo;
+import com.getcarloan.reservice.repository.EnquiryRepo;
 import com.getcarloan.reservice.repository.UserRepo;
-import com.getcarloan.reservice.service.ReserviceService;
+import com.getcarloan.reservice.service.EnquiryService;
 
 @Service
-public class ReserviceServer implements ReserviceService {
+public class EnquiryServerImpl implements EnquiryService {
 	
 	
 	@Autowired
 	private JavaMailSender sender;
 	@Autowired
-	private ReserviceRepo rerepo;
+	private EnquiryRepo rerepo;
 	
 	
 	

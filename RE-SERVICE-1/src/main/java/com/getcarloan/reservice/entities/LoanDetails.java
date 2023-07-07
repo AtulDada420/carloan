@@ -22,11 +22,11 @@ public class LoanDetails {
 	@SequenceGenerator(name = "loan_generator", sequenceName = "LOAN_SEQUENCE",initialValue=99999,allocationSize = 0)
 	private int loanId;
 	private int loanNo;
-	@OneToOne(cascade = CascadeType.ALL)
-	private EMIDetails emidetails;
 	private double loanAmount;
 	private int rateOfInterest;
 	private int tenure;
 	private double totalAmounttobepaid;
 	private int processingFees;
+
+	
 }

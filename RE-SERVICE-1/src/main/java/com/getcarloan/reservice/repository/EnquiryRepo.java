@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 
 @Repository
-public interface ReserviceRepo extends JpaRepository<EnquiryDetails, Integer> {
+public interface EnquiryRepo extends JpaRepository<EnquiryDetails, Integer> {
 
 }

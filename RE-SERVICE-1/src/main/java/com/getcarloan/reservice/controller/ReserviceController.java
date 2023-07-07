@@ -2,10 +2,10 @@ package com.getcarloan.reservice.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,20 +26,11 @@ import com.getcarloan.reservice.entities.CustomerAddress;
 import com.getcarloan.reservice.entities.EnquiryDetails;
 import com.getcarloan.reservice.entities.GuarantorDetails;
 import com.getcarloan.reservice.entities.LoanDetails;
-import com.getcarloan.reservice.entities.LoanPlans;
 import com.getcarloan.reservice.entities.PreviousLoan;
 import com.getcarloan.reservice.entities.PreviousLoanBank;
 import com.getcarloan.reservice.entities.User;
-import com.getcarloan.reservice.service.AccountDetailsService;
-import com.getcarloan.reservice.service.AllPersonalDocsService;
-import com.getcarloan.reservice.service.CustomerAddressService;
 import com.getcarloan.reservice.service.CustomerService;
-import com.getcarloan.reservice.service.GuarantorDetailsService;
-import com.getcarloan.reservice.service.LoanDetailsService;
-import com.getcarloan.reservice.service.LoanPlansService;
-import com.getcarloan.reservice.service.PreviousLoanBankService;
-import com.getcarloan.reservice.service.PreviousLoanService;
-import com.getcarloan.reservice.service.ReserviceService;
+import com.getcarloan.reservice.service.EnquiryService;
 import com.getcarloan.reservice.service.UserService;
 
 @RestController
@@ -48,27 +38,13 @@ import com.getcarloan.reservice.service.UserService;
 public class ReserviceController {
 
 	@Autowired
-	private ReserviceService reservice;
+	private EnquiryService reservice;
 	@Autowired
 	private UserService usrservice;
-	@Autowired
-	private AllPersonalDocsService docservice;
+	
 	@Autowired
 	private CustomerService customerservice;
-	@Autowired
-	private AccountDetailsService accservice;
-	@Autowired
-	private CustomerAddressService caddservice;
-	@Autowired
-	private GuarantorDetailsService guarantorservice;
-	@Autowired
-	private LoanDetailsService loanservice;
-	@Autowired
-	private LoanPlansService loanPlanservice;
-	@Autowired
-	private PreviousLoanService preloanservice;
-	@Autowired
-	private PreviousLoanBankService preloanBankservice;
+	
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -133,8 +109,8 @@ public class ReserviceController {
 			doc.setBankCheque(F7.getBytes());
 			doc.setSalarySlips(F8.getBytes());
 			customer = customerservice.findByCid(cid);
-			//customer.setCAllPersonalDocs(doc);
-			docservice.saveDocument(doc);
+			customer.setCAllPersonalDocs(doc);
+	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -145,12 +121,20 @@ public class ReserviceController {
 	public ResponseEntity<String> ioException() {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File not uploaded correctly");
 	}
+	
+
+	@GetMapping("/getAllDocumentsByCid/{cid}")
+	public ResponseEntity<AllPersonalDocs> getAllDocumentsByCid(@PathVariable int cid) {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllDocumentsByCid(cid));
+	}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/saveCustomer")
-	public ResponseEntity<String> saveCustomer(@RequestBody CustomerDTO customer) {
-		return new ResponseEntity<String>(customerservice.saveCustomer(customer), HttpStatus.CREATED);
+	public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customerDto) {
+		customerservice.saveCustomer(customerDto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(customerDto);
 	}
 	
 	@GetMapping("/getCustomerById/{cid}")
@@ -175,197 +159,103 @@ public class ReserviceController {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/saveAccountDetails")
-	public ResponseEntity<String> saveAccountDetails(@RequestBody AccountDetails accountDetails) {
-		return new ResponseEntity<String>(accservice.saveAccountDetails(accountDetails), HttpStatus.CREATED);
+	@PostMapping("/saveAccountDetails/{cid}")
+	public ResponseEntity<Customer> saveAccountDetails(@RequestBody AccountDetails accountDetails,@PathVariable int cid) {
+		
+		Customer  customer = customerservice.findByCid(cid);
+          customer.setCAccountDetails(accountDetails);
+          customerservice.saveCustomeWithAccountDetails(customer);
+
+		return  ResponseEntity.status(HttpStatus.CREATED).body(customer);
 
 	}
 
-	@GetMapping("/getAllAccountDetailsById/{accountId}")
-	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
-	}
-
-	@PutMapping("/updateAccountDetails/{accountId}")
-	public ResponseEntity<String> updateAccountDetailsByUserId(@PathVariable int accountId) {
-		return new ResponseEntity<String>(accservice.updateAccountDetailsById(accountId), HttpStatus.OK);
-	}
-
-	@DeleteMapping("deleteAccountDetails/{accountId}")
-	public ResponseEntity<String> deleteAccountDetailsById(@PathVariable int accountId) {
-		return new ResponseEntity<String>(accservice.deleteAccountDetailsById(accountId), HttpStatus.OK);
-	}
-
-	@GetMapping("/getAllAccountDetails")
-	public ResponseEntity<List<AccountDetails>> getAllAccountDetails() {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetails());
+	@GetMapping("/getAllAccountDetailsByCid/{cid}")
+	public ResponseEntity<AccountDetails> getAllAccountDetailsByCid(@PathVariable int cid) {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllAccountDetailsByCid(cid));
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/saveCustomerAddress")
-	public ResponseEntity<String> saveCustomerAddress(@RequestBody CustomerAddress customerAddress) {
+	@PostMapping("/saveCustomerAddress/{cid}")
+	public ResponseEntity<Customer> saveCustomerAddress(@RequestBody CustomerAddress customerAddress,@PathVariable int cid) {
 
-		return new ResponseEntity<String>(caddservice.saveCustomerAddress(customerAddress), HttpStatus.CREATED);
 
-	}
-
-	@GetMapping("/CustomerAddressById/{addId}")
-	public ResponseEntity<CustomerAddress> CustomerAddressById(@PathVariable int addId) {
-		return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressById(addId), HttpStatus.OK);
-	}
-
-	@PutMapping("/updateCustomerAddress/{addId}")
-	public ResponseEntity<String> updateCustomerAddressById(@PathVariable int addId) {
-		return new ResponseEntity<String>(caddservice.updateCustomerAddressById(addId), HttpStatus.OK);
-	}
-
-	@DeleteMapping("deleteCustomerAddress/{addId}")
-	public ResponseEntity<String> deleteCustomerAddressById(@PathVariable int addId) {
-		return new ResponseEntity<String>(caddservice.deleteCustomerAddressById(addId), HttpStatus.OK);
+		Customer  customer = customerservice.findByCid(cid);
+          customer.setCAddress(customerAddress);
+		return new ResponseEntity<Customer>(customerservice.saveCustomeWithCustomerAddress(customer), HttpStatus.CREATED);
 
 	}
+
+	  @GetMapping("/CustomerAddressByCid/{cid}")
+	  public ResponseEntity<CustomerAddress> CustomerAddressByCid(@PathVariable int cid) {
+		  return new ResponseEntity<CustomerAddress>(customerservice.CustomerAddressByCid(cid), HttpStatus.OK);
+    	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/saveGuarantorDetails")
-	public ResponseEntity<String> saveGuarantorDetails(@RequestBody GuarantorDetails guarantorDetails) {
-		return new ResponseEntity<String>(guarantorservice.saveGuarantorDetails(guarantorDetails), HttpStatus.CREATED);
+	@PostMapping("/saveGuarantorDetailsByCid/{cid}")
+	public ResponseEntity<Customer> saveGuarantorDetailsByCid(@RequestBody GuarantorDetails guarantorDetails,@PathVariable int cid) {
+		Customer  customer = customerservice.findByCid(cid);
+        customer.setCGuarantorDetails(guarantorDetails);
+		return new ResponseEntity<Customer>(customerservice.saveGuarantorDetailsByCid(customer), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getGuarantorDetailsById/{gid}")
-	public ResponseEntity<GuarantorDetails> getGuarantorDetailsById(@PathVariable int gid) {
-		return new ResponseEntity<GuarantorDetails>(guarantorservice.getGuarantorDetailsById(gid), HttpStatus.OK);
-
-	}
-
-	@PutMapping("/updateGuarantorDetails")
-	public ResponseEntity<String> updateGuarantorDetailsById(@PathVariable int gid) {
-		return new ResponseEntity<String>(guarantorservice.updateGuarantorDetailsById(gid), HttpStatus.OK);
-	}
-
-	@DeleteMapping("/deleteGuarantorDetailsById/{gid}")
-	public ResponseEntity<String> deleteGuarantorDetailsById(@PathVariable int gid) {
-		return new ResponseEntity<String>(guarantorservice.deleteGuarantorDetailsById(gid), HttpStatus.OK);
-	}
-
-	@GetMapping("/getAllguarantorDetails")
-	public ResponseEntity<List<GuarantorDetails>> getAllGuarantorDetails() {
-		return new ResponseEntity<List<GuarantorDetails>>(guarantorservice.getAllGuarantorDetails(), HttpStatus.OK);
+	@GetMapping("/getGuarantorDetailsByCid/{cid}")
+	public ResponseEntity<GuarantorDetails> getGuarantorDetailsByCid(@PathVariable int cid) {
+		return new ResponseEntity<GuarantorDetails>(customerservice.getGuarantorDetailsByCid(cid), HttpStatus.OK);
 
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/saveLoanDetails")
-	public ResponseEntity<String> saveLoanDetails(@RequestBody LoanDetails loanDetails) {
-		return new ResponseEntity<String>(loanservice.saveLoanDetails(loanDetails), HttpStatus.CREATED);
+	@PostMapping("/saveLoanDetailsByCid/{cid}")
+	public ResponseEntity<Customer> saveLoanDetailsByCid(@RequestBody LoanDetails loanDetails,@PathVariable int cid) {
+		
+		Customer  customer = customerservice.findByCid(cid);
+        customer.setCLoanDetails(loanDetails);
+		return new ResponseEntity<Customer>(customerservice.saveLoanDetailsCid(customer), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getLoanDetailsById/{loanId}")
-	public ResponseEntity<LoanDetails> getLoanDetailsById(@PathVariable int loanId) {
-		return new ResponseEntity<LoanDetails>(loanservice.getLoanDetailsById(loanId), HttpStatus.OK);
+	@GetMapping("/getLoanDetailsByCid/{cid}")
+	public ResponseEntity<LoanDetails> getLoanDetailsByCid(@PathVariable int cid) {
+		return new ResponseEntity<LoanDetails>(customerservice.getLoanDetailsByCid(cid), HttpStatus.OK);
 	}
 
-	@GetMapping("/getAllLoanDetails")
-	public ResponseEntity<List<LoanDetails>> getAllLoanDetails() {
-		return new ResponseEntity<List<LoanDetails>>(loanservice.getAllLoanDetails(), HttpStatus.OK);
-	}
-
-	@PutMapping("/updateLoanDetails/{loanId}")
-	public ResponseEntity<String> updateLoanDetailsById(@PathVariable int loanId) {
-		return new ResponseEntity<String>(loanservice.updateLoanDetailsById(loanId), HttpStatus.OK);
-
-	}
-
-	@DeleteMapping("/deleteLoanDetails/{loanId}")
-	public ResponseEntity<String> deleteLoanDetailsById(@PathVariable int loanId) {
-		return new ResponseEntity<String>(loanservice.deleteLoanDetailsById(loanId), HttpStatus.OK);
-	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@PostMapping("/saveLoanPlans")
-	public ResponseEntity<String> saveLoanPlans(@RequestBody LoanPlans loanPlans) {
-		return new ResponseEntity<String>(loanPlanservice.saveLoanPlans(loanPlans), HttpStatus.CREATED);
+
+	@PostMapping("/savePreviousLoanByCid/{cid}")
+	public ResponseEntity<Customer> savePreviousLoanByCid(@RequestBody PreviousLoan previousLoan,@PathVariable int cid) {
+		
+		Customer  customer = customerservice.findByCid(cid);
+        customer.setCPreviousLoan(previousLoan);
+
+		return new ResponseEntity<Customer>(customerservice.savePreviousLoanByCid(customer), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/getLoanPlansById/{planID}")
-	public ResponseEntity<LoanPlans> getLoanPlansById(@PathVariable int planID) {
-		return new ResponseEntity<LoanPlans>(loanPlanservice.getLoanPlansById(planID), HttpStatus.OK);
+	@GetMapping("/getPreviousLoanByCid/{cid}")
+	public ResponseEntity<PreviousLoan> getPreviousLoanByCid(@PathVariable int cid) {
+		return new ResponseEntity<PreviousLoan>(customerservice.getPreviousLoanByCid(cid), HttpStatus.OK);
 	}
 
-	@GetMapping("/getAllLoanPlans")
-	public ResponseEntity<List<LoanPlans>> getAllLoanPlans() {
-		return new ResponseEntity<List<LoanPlans>>(loanPlanservice.getAllLoanPlans(), HttpStatus.OK);
+////////////////////////
 
-	}
+	@PostMapping("/savePreviousLoanBankByCid/{cid}")
+	public ResponseEntity<Customer> savePreviousLoanBankByCid(@RequestBody PreviousLoanBank previousLoanBank,@PathVariable int cid) {
+		
+		Customer  customer = customerservice.findByCid(cid);
+        customer.setPbankDetails(previousLoanBank);
 
-	@PutMapping("/updateLoanPlans/{planID}")
-	public ResponseEntity<String> updateLoanPlansById(@RequestBody int planID) {
-		return new ResponseEntity<String>(loanPlanservice.updateLoanPlansById(planID), HttpStatus.OK);
-	}
-
-	@DeleteMapping("/deleteLoanPlans/{planID}")
-	public ResponseEntity<String> deleteLoanPlansById(@PathVariable int planID) {
-		return new ResponseEntity<String>(loanPlanservice.deleteLoanPlansById(planID), HttpStatus.OK);
-
-	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@PostMapping("/savePreviousLoan")
-	public ResponseEntity<String> savePreviousLoan(@RequestBody PreviousLoan previousLoan) {
-		return new ResponseEntity<String>(preloanservice.savePreviousLoan(previousLoan), HttpStatus.CREATED);
-	}
-
-	@GetMapping("/getPreviousLoan/{pLoanId}")
-	public ResponseEntity<PreviousLoan> getPreviousLoanById(@PathVariable int pLoanId) {
-		return new ResponseEntity<PreviousLoan>(preloanservice.getPreviousLoanById(pLoanId), HttpStatus.OK);
-	}
-
-	@GetMapping("/getAllPreviousLoan")
-	public ResponseEntity<List<PreviousLoan>> getAllPreviousLoan() {
-		return new ResponseEntity<List<PreviousLoan>>(preloanservice.getAllPreviousLoan(), HttpStatus.OK);
-	}
-
-	@PutMapping("/updatePreviousLoan/{pLoanId}")
-	public ResponseEntity<String> updatePreviousLoanById(@RequestBody int pLoanId) {
-		return new ResponseEntity<String>(preloanservice.updatePreviousLoanById(pLoanId), HttpStatus.OK);
-	}
-
-	@DeleteMapping("/deletePreviousLoan/{pLoanId}")
-	public ResponseEntity<String> deletePreviousLoansById(@PathVariable int pLoanId) {
-		return new ResponseEntity<String>(preloanservice.deletePreviousLoanById(pLoanId), HttpStatus.OK);
-
-	}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-
-	@PostMapping("/savePreviousLoanBank")
-	public ResponseEntity<String> savePreviousLoanBank(@RequestBody PreviousLoanBank previousLoanBank) {
-		return new ResponseEntity<String>(preloanBankservice.savePreviousLoanBank(previousLoanBank),HttpStatus.CREATED);
+		return new ResponseEntity<Customer>(customerservice.savePreviousLoanBankByCid(customer),HttpStatus.CREATED);
 				
 	}
 
-	@GetMapping("/getPreviousLoanBank/{bId}")
-	public ResponseEntity<PreviousLoanBank> getPreviousLoanBankById(@PathVariable int bId) {
-		return new ResponseEntity<PreviousLoanBank>(preloanBankservice.getPreviousLoanBankById(bId),
+	@GetMapping("/getPreviousLoanBankByCid/{cid}")
+	public ResponseEntity<PreviousLoanBank> getPreviousLoanBankByCid(@PathVariable int cid) {
+		
+		return new ResponseEntity<PreviousLoanBank>(customerservice.getPreviousLoanBankByCid(cid),
 				HttpStatus.OK);
 	}
 
-	@GetMapping("/getAllPreviousLoanBank")
-	public ResponseEntity<List<PreviousLoanBank>> getAllPreviousLoanBank() {
-		return new ResponseEntity<List<PreviousLoanBank>>(preloanBankservice.getAllPreviousLoanBank(), HttpStatus.OK);
-	}
-
-	@PutMapping("/updatePreviousLoanBank/{bId}")
-	public ResponseEntity<String> updatePreviousLoanBankById(@RequestBody int bId) {
-		return new ResponseEntity<String>(preloanBankservice.updatePreviousLoanbankById(bId), HttpStatus.OK);
-	}
-
-	@DeleteMapping("/deletePreviousLoanBank/{bId}")
-	public ResponseEntity<String> deletePreviousLoansBankById(@PathVariable int bId) {
-		return new ResponseEntity<String>(preloanBankservice.deletePreviousLoanBankById(bId), HttpStatus.OK);
-
-	}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 }

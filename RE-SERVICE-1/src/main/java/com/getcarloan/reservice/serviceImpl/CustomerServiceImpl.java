@@ -83,12 +83,6 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer saveCustomerDocs(Customer customer) {
 		return crepo.save(customer);
 	}
-
-	@Override
-	public void saveDocument(AllPersonalDocs doc) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public AllPersonalDocs getAllDocumentsByCid(int cid) {

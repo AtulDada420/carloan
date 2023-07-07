@@ -23,7 +23,7 @@ private int	branchCode;
 private String BranchType;
 private String	IFSCcode;
 private String	MICRcode;
-private	 int ConatctNO;
+private	 long ConatctNO;
 private String	BranchAddress;
 private	String Email;
 private	String status;

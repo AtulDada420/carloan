@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.getcarloan.reservice.dto.CustomerDTO;
 import com.getcarloan.reservice.entities.AccountDetails;
 import com.getcarloan.reservice.entities.AllPersonalDocs;
 import com.getcarloan.reservice.entities.Customer;
@@ -27,9 +28,6 @@ import com.getcarloan.reservice.entities.GuarantorDetails;
 import com.getcarloan.reservice.entities.LoanDetails;
 import com.getcarloan.reservice.entities.LoanPlans;
 import com.getcarloan.reservice.entities.User;
-import com.getcarloan.reservice.service.AccountDetailsService;
-import com.getcarloan.reservice.service.AllPersonalDocsService;
-import com.getcarloan.reservice.service.CustomerAddressService;
 import com.getcarloan.reservice.service.CustomerService;
 import com.getcarloan.reservice.service.GuarantorDetailsService;
 import com.getcarloan.reservice.service.LoanDetailsService;
@@ -45,21 +43,22 @@ public class ReserviceController {
 	private ReserviceService reservice;
 	@Autowired
 	private UserService usrservice;
-	@Autowired
-	private AllPersonalDocsService docservice;
+
 	@Autowired
 	private CustomerService customerservice;
-	@Autowired
-	private AccountDetailsService accservice;
-	@Autowired
-	private CustomerAddressService caddservice;
-	@Autowired
-	private GuarantorDetailsService guarantorservice;
 	@Autowired
 	private LoanDetailsService loanservice;
     @Autowired
 	private LoanPlansService loanPlanservice;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+   @GetMapping("/")
+   public ResponseEntity<String> checkApi() {
+		return ResponseEntity.status(HttpStatus.OK).body("app working fine-------------------");
+	}
+    
+    
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/createEnquiry")
@@ -106,12 +105,14 @@ public class ReserviceController {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/saveDocument")
-	public ResponseEntity<String> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
+	@PostMapping("/saveDocument/{cid}")
+	public ResponseEntity<Customer> saveDocument(@RequestPart MultipartFile F1, @RequestPart MultipartFile F2,
 			@RequestPart MultipartFile F3, @RequestPart MultipartFile F4, @RequestPart MultipartFile F5,
-			@RequestPart MultipartFile F6, @RequestPart MultipartFile F7, @RequestPart MultipartFile F8) {
+			@RequestPart MultipartFile F6, @RequestPart MultipartFile F7, @RequestPart MultipartFile F8, @PathVariable int cid) {
+		Customer customer=null;
 
 		AllPersonalDocs doc = new AllPersonalDocs();
+		
 		try {
 			doc.setAddressProof(F1.getBytes());
 			doc.setPanCard(F2.getBytes());
@@ -121,17 +122,21 @@ public class ReserviceController {
 			doc.setSign(F6.getBytes());
 			doc.setBankCheque(F7.getBytes());
 			doc.setSalarySlips(F8.getBytes());
+		      
+		      customer = customerservice.findByEID(cid);
+		      //customer.setCAllPersonalDocs(doc);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		docservice.saveDocument(doc);
-		return ResponseEntity.status(HttpStatus.CREATED).body("Document uploaded");
+		customerservice.saveDocument(doc);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(customerservice.SaveCustomerwithDocument(customer));
 	}
 
 	@ExceptionHandler(IOException.class)
 	public ResponseEntity<String> ioException() {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File not uploaded correctly");
 	}
+	
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -141,9 +146,9 @@ public class ReserviceController {
 	}
 
 	@PostMapping("/saveCustomer")
-	public ResponseEntity<String> saveCustomer(@RequestBody Customer customer) {
-		return new ResponseEntity<String>(customerservice.saveCustomer(customer), HttpStatus.CREATED);
-
+	public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customerDto) {
+			customerservice.saveCustomer(customerDto);
+			return ResponseEntity.status(HttpStatus.CREATED).body(customerDto);
 	}
 
 	@GetMapping("/getAllCustomer")
@@ -160,89 +165,91 @@ public class ReserviceController {
 	public ResponseEntity<String> deleteCustomer(@PathVariable int cid) {
 		return new ResponseEntity<String>(customerservice.deleteCustomer(cid), HttpStatus.OK);
 	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@PostMapping("/saveAccountDetails")
-	public ResponseEntity<String> saveAccountDetails(@RequestBody AccountDetails accountDetails) {
-		return new ResponseEntity<String>(accservice.saveAccountDetails(accountDetails), HttpStatus.CREATED);
-
+	@PostMapping("/saveAccountDetails/{cid}")
+	public ResponseEntity<Customer> saveAccountDetails(@RequestBody AccountDetails accountDetails,@PathVariable int cid) {
+		
+		Customer customer = customerservice.findByEID(cid);
+	     // customer.setCAccountDetails(accountDetails);
+	      customerservice.saveAccountDetails(accountDetails);
+	      return ResponseEntity.status(HttpStatus.CREATED).body(customerservice.SaveCustomerwithAccountDetails(customer));
 	}
 
-	@GetMapping("/getAllAccountDetailsById/{accountId}")
-	public ResponseEntity<AccountDetails> getAllAccountDetailsById(@PathVariable int accountId) {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetailsById(accountId));
+	@GetMapping("/getAllAccountDetailsById/{cid}")
+	public ResponseEntity<Customer> getAllAccountDetailsByCustomerId(@PathVariable int cid) {
+		return ResponseEntity.status(HttpStatus.OK).body(customerservice.getAllAccountDetailsByCustomerId(cid));
 	}
 
-	@PutMapping("/updateAccountDetails/{accountId}")
-	public ResponseEntity<String> updateAccountDetailsByUserId(@PathVariable int accountId) {
-		return new ResponseEntity<String>(accservice.updateAccountDetailsById(accountId), HttpStatus.OK);
+	@PutMapping("/updateAccountDetails/{cid}")
+	public ResponseEntity<String> updateAccountDetailsByCustomerId(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.updateAccountDetailsByCustomerId(cid), HttpStatus.OK);
 	}
 
-	@DeleteMapping("deleteAccountDetails/{accountId}")
-	public ResponseEntity<String> deleteAccountDetailsById(@PathVariable int accountId) {
-		return new ResponseEntity<String>(accservice.deleteAccountDetailsById(accountId), HttpStatus.OK);
+	@DeleteMapping("deleteAccountDetails/{cid}")
+	public ResponseEntity<String> deleteAccountDetailsByCustomerId(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.deleteAccountDetailsByCustomerId(cid), HttpStatus.OK);
 	}
 
-	@GetMapping("/getAllAccountDetails")
-	public ResponseEntity<List<AccountDetails>> getAllAccountDetails() {
-		return ResponseEntity.status(HttpStatus.OK).body(accservice.getAllAccountDetails());
-	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/saveCustomerAddress")
-	public ResponseEntity<String> saveCustomerAddress(@RequestBody CustomerAddress customerAddress) {
-
-		return new ResponseEntity<String>(caddservice.saveCustomerAddress(customerAddress), HttpStatus.CREATED);
-
+	@PostMapping("/saveCustomerAddress/{cid}")
+	public ResponseEntity<Customer> saveCustomerAddressByCustomerId(@RequestBody CustomerAddress customerAddress,@PathVariable int cid) {
+		
+		Customer customer = customerservice.findByEID(cid);
+	     // customer.setCAddress(customerAddress);
+	      customerservice.saveCustomerAddressByCid(customerAddress);
+	      return ResponseEntity.status(HttpStatus.CREATED).body(customerservice.SaveCustomerwithCustomerAddress(customer));
+	       
 	}
 
-	@GetMapping("/CustomerAddressById/{addId}")
-	public ResponseEntity<CustomerAddress> CustomerAddressById(@PathVariable int addId) {
-		return new ResponseEntity<CustomerAddress>(caddservice.CustomerAddressById(addId), HttpStatus.OK);
+	@GetMapping("/CustomerAddressByCid/{cid}")
+	public ResponseEntity<Customer> CustomerAddressBycId(@PathVariable int cid) {
+		return new ResponseEntity<Customer>(customerservice.CustomerAddressBycId(cid), HttpStatus.OK);
 	}
 
-	@PutMapping("/updateCustomerAddress/{addId}")
-	public ResponseEntity<String> updateCustomerAddressById(@PathVariable int addId) {
-		return new ResponseEntity<String>(caddservice.updateCustomerAddressById(addId), HttpStatus.OK);
+	@PutMapping("/updateCustomerAddressCid/{cid}")
+	public ResponseEntity<String> updateCustomerAddressByCid(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.updateCustomerAddressByCid(cid), HttpStatus.OK);
 	}
 
-	@DeleteMapping("deleteCustomerAddress/{addId}")
-	public ResponseEntity<String> deleteCustomerAddressById(@PathVariable int addId) {
-		return new ResponseEntity<String>(caddservice.deleteCustomerAddressById(addId), HttpStatus.OK);
+	@DeleteMapping("deleteCustomerAddressCid/{cid}")
+	public ResponseEntity<String> deleteCustomerAddressByCid(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.deleteCustomerAddressByCid(cid), HttpStatus.OK);
 
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/saveGuarantorDetails")
-	public ResponseEntity<String> saveGuarantorDetails(@RequestBody GuarantorDetails guarantorDetails) {
-		return new ResponseEntity<String>(guarantorservice.saveGuarantorDetails(guarantorDetails), HttpStatus.CREATED);
+	@PostMapping("/saveGuarantorDetails/{cid}")
+	public ResponseEntity<Customer> saveGuarantorDetails(@RequestBody GuarantorDetails guarantorDetails,@PathVariable int cid) {
+		
+		Customer customer = customerservice.findByEID(cid);
+	    //  customer.setCGuarantorDetails(guarantorDetails);
+	      customerservice.saveGuarantorDetailsByCid(guarantorDetails);
+	      return ResponseEntity.status(HttpStatus.CREATED).body(customerservice.SaveCustomerwithGuarantorDetails(customer));
+		
+		
 	}
 
-	@GetMapping("/getGuarantorDetailsByUserId/{gid}")
-	public ResponseEntity<GuarantorDetails> getGuarantorDetailsById(@PathVariable int gid) {
-		return new ResponseEntity<GuarantorDetails>(guarantorservice.getGuarantorDetailsById(gid), HttpStatus.OK);
-
-	}
-
-	@PutMapping("/updateGuarantorDetails")
-	public ResponseEntity<String> updateGuarantorDetailsById(@PathVariable int gid) {
-		return new ResponseEntity<String>(guarantorservice.updateGuarantorDetailsById(gid), HttpStatus.OK);
-	}
-
-	@DeleteMapping("/deleteGuarantorDetailsById/{gid}")
-	public ResponseEntity<String> deleteGuarantorDetailsById(@PathVariable int gid) {
-		return new ResponseEntity<String>(guarantorservice.deleteGuarantorDetailsById(gid), HttpStatus.OK);
-	}
-
-	@GetMapping("/getAllguarantorDetails")
-	public ResponseEntity<List<GuarantorDetails>> getAllGuarantorDetails() {
-		return new ResponseEntity<List<GuarantorDetails>>(guarantorservice.getAllGuarantorDetails(), HttpStatus.OK);
+	@GetMapping("/getGuarantorDetailsByCid/{cid}")
+	public ResponseEntity<Customer> getGuarantorDetailsByCid(@PathVariable int cid) {
+		return new ResponseEntity<Customer>(customerservice.getGuarantorDetailsByCid(cid), HttpStatus.OK);
 
 	}
 
+	@PutMapping("/updateGuarantorDetails/{cid}")
+	public ResponseEntity<String> updateGuarantorDetailsById(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.updateGuarantorDetailsById(cid), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/deleteGuarantorDetailsByCid/{cid}")
+	public ResponseEntity<String> deleteGuarantorDetailsByCid(@PathVariable int cid) {
+		return new ResponseEntity<String>(customerservice.deleteGuarantorDetailsById(cid), HttpStatus.OK);
+	}
+
+	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/saveLoanDetails")

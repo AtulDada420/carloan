@@ -28,15 +28,15 @@ public class LoanDisbursementServiceImpl implements LoanDisbursementService {
 	@Override
 	public String generateLoanDisbursementFile(LoanDisbursement loanDisbursement) {
 	ldRepo.save(loanDisbursement);
-	SanctionLetter sanction=new SanctionLetter();
+	
      SimpleMailMessage message=new SimpleMailMessage();
 	
 	
-//	message.setFrom("sunagujiri22@gmail.com");
-//	message.setTo(sanction.getEmail());
-//	message.setSubject("Loan is Disbursed");
-//	message.setText("Hello " + sanction.getApplicantName()+ ".....\nYour Car Loan is Successfully Disbursed....!! "+"\n Your Account is credited with loan amount = \n "+sanction.getLoanAmtSanctioned());
-//	sender.send(message);
+	message.setFrom("sunagujiri22@gmail.com");
+	message.setTo(loanDisbursement.getEmail());
+	message.setSubject("Confirmation of Loan is Disbursed");
+	message.setText("Hello " + loanDisbursement.getApplicantName()+ ".....\nYour Car Loan is Successfully Disbursed....!! "+"\n Your Account is credited with loan amount = \n "+loanDisbursement.getTotalAmount());
+	sender.send(message);
 	
 	
 		return "Loan Disbursement File is Generated....!!!";

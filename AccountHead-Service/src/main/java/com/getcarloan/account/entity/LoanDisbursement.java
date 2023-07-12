@@ -16,6 +16,8 @@ public class LoanDisbursement {
 	@Id
 	private int agreementId;
 	private int cid;
+	private String applicantName;
+	private String email;
 	private int loanNo;
 	private String agreementDate;
 	private String amountPayType;

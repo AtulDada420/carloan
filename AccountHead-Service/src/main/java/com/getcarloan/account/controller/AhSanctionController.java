@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.getcarloan.account.entity.Customer;
-
+import com.getcarloan.account.entity.LoanApproval;
 import com.getcarloan.account.entity.SanctionLetter;
-
+import com.getcarloan.account.proxy.FeignCommnicationn;
 import com.getcarloan.account.service.SanctionService;
-
-
-
 
 
 @RestController
@@ -31,12 +28,22 @@ public class AhSanctionController {
 	@Autowired
 	private SanctionService service ;
 	
-	
+	@Autowired
+	private FeignCommnicationn commm;
 	
 	@PostMapping("/saveSanctionLetter")
 	public ResponseEntity<String> saveSanctionLetter(@RequestBody SanctionLetter sanctionLetter) {
 		System.out.println(sanctionLetter);
 		return new ResponseEntity<String>(service.saveSanctionLetter(sanctionLetter),HttpStatus.CREATED);
+		
+	}
+	
+	@GetMapping("/getSanctionAmtByCid/{cid}")
+	public ResponseEntity<LoanApproval> getSanctionAmtByCid(@PathVariable int cid)
+	{
+//		LoanApproval loan=commm.loanSantionByCid(cid);
+//		return ResponseEntity.status(HttpStatus.OK).body(loan);
+		 return new ResponseEntity<LoanApproval>(commm.getSanctionAmtByCid(cid),HttpStatus.OK);
 		
 	}
 

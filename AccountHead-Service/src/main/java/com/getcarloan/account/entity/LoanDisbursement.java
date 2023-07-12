@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class LoanDisbursement {
 	@Id
-	private int agreementId;
 	private int cid;
+	private int agreementId;
 	private String applicantName;
 	private String email;
 	private int loanNo;

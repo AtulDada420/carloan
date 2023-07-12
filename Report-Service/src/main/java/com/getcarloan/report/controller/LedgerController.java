@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,9 +39,6 @@ public class LedgerController {
 	}
 	
 	
-	
-	
-	
 	@GetMapping("/getAllCustomerbyfeign")
 	public ResponseEntity<List<Customer>> getAllCustomersbyfeign()
 	{
@@ -53,6 +51,13 @@ public class LedgerController {
 	{
 		Ledger cust1=lservice.getCustomerId(cid);
 		return ResponseEntity.status(HttpStatus.OK).body(cust1);
+	}
+	
+	@PutMapping("/updateledger")
+	public ResponseEntity<Ledger> updateledger(Ledger ledger)
+	{
+		Ledger leg=lservice.updateledger(ledger);
+		return ResponseEntity.status(HttpStatus.OK).body(leg);
 	}
 
 }

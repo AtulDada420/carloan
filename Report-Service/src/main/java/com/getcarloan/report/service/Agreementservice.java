@@ -15,4 +15,6 @@ public interface Agreementservice {
 
 	Customer getCustomerByCust(int cid);
 
+	Agreement updateAgreement(Agreement agreement);
+
 }

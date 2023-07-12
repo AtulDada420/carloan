@@ -15,4 +15,6 @@ public interface Ledgerservice {
 
 	List<Customer> getAllCustomersbyfeign();
 
+	Ledger updateledger(Ledger ledger);
+
 }

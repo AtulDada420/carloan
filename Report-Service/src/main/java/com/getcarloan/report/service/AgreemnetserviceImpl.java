@@ -45,4 +45,9 @@ public class AgreemnetserviceImpl implements Agreementservice{
 		return id;
 	}
 
+	@Override
+	public Agreement updateAgreement(Agreement agreement) {
+		return arepo.save(agreement);
+	}
+
 }

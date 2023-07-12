@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +51,14 @@ public class EmiController {
 	{
 		Customer cust=eservice.getCustomerId(cid);
 		return ResponseEntity.status(HttpStatus.OK).body(cust);
+	}
+	
+	@PutMapping("/updateEmi")
+	public ResponseEntity<EMI>updateEmiDetailsByEid(@RequestBody EMI emi)
+	{
+		EMI emi1=eservice.updateEmiDetailsByEid(emi);
+		return ResponseEntity.status(HttpStatus.OK).body(emi1);
+		
 	}
 
 }

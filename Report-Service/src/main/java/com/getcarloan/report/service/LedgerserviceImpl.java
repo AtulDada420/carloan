@@ -19,9 +19,6 @@ public class LedgerserviceImpl implements Ledgerservice{
 	@Autowired
 	private Feigncommunication communication;
 
-	
-	
-
 	@Override
 	public List<Ledger> getAllLedger() {
 		return lrepo.findAll();
@@ -48,6 +45,13 @@ public class LedgerserviceImpl implements Ledgerservice{
 	public void CreateLedger(Ledger ledger) {
 		lrepo.save(ledger);
 		
+	}
+
+
+
+	@Override
+	public Ledger updateledger(Ledger ledger) {
+		return 	lrepo.save(ledger);
 	}
 
 }

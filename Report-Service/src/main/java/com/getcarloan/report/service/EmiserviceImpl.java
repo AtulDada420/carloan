@@ -44,4 +44,9 @@ public class EmiserviceImpl implements Emiservice {
 		return cust1;
 	}
 
+	@Override
+	public EMI updateEmiDetailsByEid(EMI emi) {
+		return erepo.save(emi);
+	}
+
 }

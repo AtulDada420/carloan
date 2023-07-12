@@ -15,4 +15,6 @@ public interface Emiservice {
 
 	Customer getCustomerId(int cid);
 
+	EMI updateEmiDetailsByEid(EMI emi);
+
 }
